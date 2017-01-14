@@ -45,9 +45,6 @@ public class UpdateEntry {
 
             String jsonRequestData = mapper.writeValueAsString(requestData);
 
-            System.out.println("---------UpdateEntry jsonRequestData-------------");
-            System.out.println(jsonRequestData);
-
             Map<String, Object> request = new LinkedHashMap<String, Object>();
             request.put("method", "set_entry");
             request.put("input_type", "json");

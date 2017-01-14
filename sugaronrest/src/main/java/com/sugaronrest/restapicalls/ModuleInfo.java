@@ -1,6 +1,7 @@
 package com.sugaronrest.restapicalls;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sugaronrest.utils.Utils;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.IOException;
@@ -56,25 +57,10 @@ public class ModuleInfo {
     }
 
     public static String readNameFromType(Type type) throws IOException, ClassNotFoundException {
-
+        ClassLoader classLoader = ModuleInfo.class.getClassLoader();
         String refClassName = getClassName(type);
-        String concateNamedClassNames = new String();
-
-        ClassLoader  classLoader = Thread.currentThread().getContextClassLoader();
-        Enumeration<URL> resources = classLoader.getResources(PackagePath);
-        refClassName = refClassName.trim();
-
-        while (resources.hasMoreElements()) {
-            URL url = resources.nextElement();
-
-            String className = new Scanner((InputStream)url.getContent()).useDelimiter("\\A").next();
-            className = className.replace(".class", StringUtils.EMPTY);
-            className = getClassName(className);
-            concateNamedClassNames = className.trim();
-        }
-
-        String classNames[] = concateNamedClassNames.split("\\r\\n|\\n|\\r");
-        if ((classNames != null) && (classNames.length > 0)) {
+        List<String> classNames = Utils.getModuleClassNames(PackagePath);
+        if ((classNames != null) && (classNames.size() > 0)) {
             for(String item : classNames){
                 if (refClassName.equalsIgnoreCase(item.trim())) {
                     Class moduleClass = Class.forName(PackageName + "." + refClassName, false, classLoader);
@@ -95,22 +81,9 @@ public class ModuleInfo {
 
     public static Class readClassFromName(String moduleName) throws IOException, ClassNotFoundException {
 
-        String concateNamedClassNames = new String();
-
-        ClassLoader  classLoader = Thread.currentThread().getContextClassLoader();
-        Enumeration<URL> resources = classLoader.getResources(PackagePath);
-
-        while (resources.hasMoreElements()) {
-            URL url = resources.nextElement();
-
-            String className = new Scanner((InputStream)url.getContent()).useDelimiter("\\A").next();
-            className = className.replace(".class", StringUtils.EMPTY);
-            className = getClassName(className);
-            concateNamedClassNames = className.trim();
-        }
-
-        String classNames[] = concateNamedClassNames.split("\\r\\n|\\n|\\r");
-        if ((classNames != null) && (classNames.length > 0)) {
+        ClassLoader classLoader = ModuleInfo.class.getClassLoader();
+        List<String> classNames = Utils.getModuleClassNames(PackagePath);
+        if ((classNames != null) && (classNames.size() > 0)) {
             for(String item : classNames){
                 Class moduleClass = Class.forName(PackageName + "." + item.trim(), false, classLoader);
                 Annotation[] moduleAnnotations = moduleClass.getAnnotations();
@@ -156,13 +129,11 @@ public class ModuleInfo {
         ModuleInfo moduleInfo = new ModuleInfo();
 
         String className = getClassName(type);
-        ClassLoader  classLoader = Thread.currentThread().getContextClassLoader();
+        ClassLoader classLoader = ModuleInfo.class.getClassLoader();
         Class moduleClass = Class.forName(PackageName + "." + className, false, classLoader);
 
         String moduleName = null;
         String jsonModuleName = null;
-
-
 
         Annotation[] moduleAnnotations = moduleClass.getAnnotations();
         for(Annotation annotation : moduleAnnotations){

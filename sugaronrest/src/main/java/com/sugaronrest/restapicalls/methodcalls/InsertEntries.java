@@ -42,9 +42,6 @@ public class InsertEntries {
 
             String jsonRequestData = mapper.writeValueAsString(requestData);
 
-            System.out.println("---------jsonRequestData-------------");
-            System.out.println(jsonRequestData);
-
             Map<String, Object> request = new LinkedHashMap<String, Object>();
             request.put("method", "set_entries");
             request.put("input_type", "json");

@@ -150,13 +150,7 @@ public class QueryTests {
         List<Cases> readCases = (List<Cases>)response.getData();
         assertNotNull(readCases);
 
-        System.out.println("---------readCases.size()-------------");
-        System.out.println(readCases.size());
-
         assertTrue(readCases.size() <= count);
-
-        System.out.println("---------readCases.size()-------------");
-        System.out.println(readCases.size());
 
         if (readCases.size() > 0) {
             boolean allConditionedValid = false;

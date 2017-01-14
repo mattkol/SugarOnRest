@@ -56,22 +56,14 @@ public class LinkedModulesTests {
         assertNull(response.getData());
         assertNotNull(jsonData);
 
-        System.out.println("---------jsonData-------------");
-        System.out.println(jsonData);
-
         // Deserialize json data to custom object
         ObjectMapper mapper = JsonObjectMapper.getMapper();
         CustomAcccount1 customAccount = mapper.readValue(jsonData, CustomAcccount1.class);
         assertNotNull(customAccount);
         assertEquals(accountId, customAccount.getId());
-
-        System.out.println("---------CustomAcccount1-------------");
-        if ((customAccount != null) && (customAccount.getContactLink() != null)){
-            System.out.println(customAccount.getContactLink().size());
-        }
-        System.out.println(mapper.writeValueAsString(customAccount));
     }
 
+    @Test
     public void linkedRead2Test() throws IOException {
         SugarRestClient client = new SugarRestClient(TestAccount.Url, TestAccount.Username, TestAccount.Password);
 
@@ -96,7 +88,6 @@ public class LinkedModulesTests {
         assertEquals(response.getStatusCode(), HttpStatus.SC_OK);
 
         String jsonData = response.getJData();
-        assertNull(jsonData);
         assertNotNull(jsonData);
         assertNotSame(jsonData, StringUtils.EMPTY );
 
@@ -118,9 +109,6 @@ public class LinkedModulesTests {
         int count = 10;
         SugarRestResponse response = LinkedModules.bulkReadAccountLinkContact(client, count);
 
-        System.out.println("---------response.getError().getTrace()-------------");
-        System.out.println(response.getError().getTrace());
-
         assertNotNull(response);
         assertEquals(response.getStatusCode(), HttpStatus.SC_OK);
 
@@ -134,21 +122,6 @@ public class LinkedModulesTests {
         List<CustomAcccount1> customAccounts = mapper.readValue(jsonData, type);
         assertNotNull(customAccounts);
         assertEquals(customAccounts.size(), count);
-
-        System.out.println("---------jsonData-------------");
-        System.out.println(jsonData);
-        System.out.println("---------response.getError().getTrace()-------------");
-        System.out.println(response.getError().getTrace());
-
-
-        System.out.println("---------CustomAcccount1-------------");
-        for (CustomAcccount1 customacc : customAccounts){
-            if ((customacc != null) && (customacc.getContactLink() != null)){
-                System.out.println(customacc.getContactLink().size());
-            }
-
-        }
-        System.out.println(mapper.writeValueAsString(customAccounts));
     }
 
     public static SugarRestResponse bulkReadAccountLinkItems2(SugarRestClient client, int count) {

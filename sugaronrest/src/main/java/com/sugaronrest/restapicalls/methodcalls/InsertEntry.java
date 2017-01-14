@@ -88,7 +88,6 @@ public class InsertEntry {
             }
         }
         catch (Exception exception) {
-            System.out.println("---------3 - InsertEntry jsonResponse-------------");
             insertEntryResponse = new InsertEntryResponse();
             ErrorResponse errorResponse = ErrorResponse.format(exception, exception.getMessage());
             insertEntryResponse.setStatusCode(HttpStatus.SC_INTERNAL_SERVER_ERROR);
