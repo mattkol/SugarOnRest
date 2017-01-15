@@ -15,6 +15,7 @@ import java.util.Map;
         "entry_list",
         "relationship_list"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ReadLinkedEntryResponse extends BaseResponse {
 
     @JsonProperty("entry_list")

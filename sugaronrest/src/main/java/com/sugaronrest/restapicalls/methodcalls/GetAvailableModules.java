@@ -27,7 +27,11 @@ public class GetAvailableModules {
     public static ReadAvailableModulesResponse run(String url, String sessionId, String moduleName) throws Exception {
 
         ReadAvailableModulesResponse readAvailableModulesResponse = new ReadAvailableModulesResponse();
+        ErrorResponse errorResponse = null;
+
         ObjectMapper mapper = JsonObjectMapper.getMapper();
+        String jsonRequest = new String();
+        String jsonResponse = new String();
 
         try {
             Map<String, Object> requestData = new LinkedHashMap<String, Object>();
@@ -42,7 +46,7 @@ public class GetAvailableModules {
             request.put("response_type", "json");
             request.put("rest_data", requestData);
 
-            String jsonRequest = mapper.writeValueAsString(request);
+            jsonRequest = mapper.writeValueAsString(request);
 
             request.put("rest_data", jsonRequestData);
 
@@ -50,38 +54,46 @@ public class GetAvailableModules {
                     .fields(request)
                     .asJson();
 
-            String jsonResponse = response.getBody().toString();
-            if (StringUtils.isNotBlank(jsonResponse)) {
-                try {
-                    readAvailableModulesResponse = mapper.readValue(jsonResponse, ReadAvailableModulesResponse.class);
-                }
-                catch (Exception exception)
-                {
-                    ErrorResponse errorResponse = mapper.readValue(jsonResponse, ErrorResponse.class);
-                    errorResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
-                    errorResponse.setTrace(exception);
-                    readAvailableModulesResponse = new ReadAvailableModulesResponse();
-                    readAvailableModulesResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
-                    readAvailableModulesResponse.setError(errorResponse);
-                }
-            }
-
-            if (readAvailableModulesResponse == null) {
+            if (response == null) {
                 readAvailableModulesResponse = new ReadAvailableModulesResponse();
-                String message = String.format("Object type %S to json conversion failed - response data is invalid!", readAvailableModulesResponse.getClass().getSimpleName());
-                ErrorResponse errorResponse = ErrorResponse.format("An error has occurred!", message);
+                errorResponse = ErrorResponse.format("An error has occurred!", "No data returned.");
                 readAvailableModulesResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
                 readAvailableModulesResponse.setError(errorResponse);
-            }
+            } else {
 
+                jsonResponse = response.getBody().toString();
+
+                if (StringUtils.isNotBlank(jsonResponse)) {
+                    // First check if we have an error
+                    errorResponse = ErrorResponse.fromJson(jsonResponse);
+                    if (errorResponse == null) {
+                        readAvailableModulesResponse = mapper.readValue(jsonResponse, ReadAvailableModulesResponse.class);
+                    }
+                }
+
+                if (readAvailableModulesResponse == null) {
+                    readAvailableModulesResponse = new ReadAvailableModulesResponse();
+                    readAvailableModulesResponse.setError(errorResponse);
+
+                    readAvailableModulesResponse.setStatusCode(HttpStatus.SC_OK);
+                    if (errorResponse != null) {
+                        readAvailableModulesResponse.setStatusCode(errorResponse.getStatusCode());
+                    }
+                } else {
+                    readAvailableModulesResponse.setStatusCode(HttpStatus.SC_OK);
+                }
+            }
         }
         catch (Exception exception) {
             readAvailableModulesResponse = new ReadAvailableModulesResponse();
-            ErrorResponse errorResponse = ErrorResponse.format(exception, exception.getMessage());
+            errorResponse = ErrorResponse.format(exception, exception.getMessage());
             readAvailableModulesResponse.setStatusCode(HttpStatus.SC_INTERNAL_SERVER_ERROR);
             errorResponse.setStatusCode(HttpStatus.SC_INTERNAL_SERVER_ERROR);
             readAvailableModulesResponse.setError(errorResponse);
         }
+
+        readAvailableModulesResponse.setJsonRawRequest(jsonRequest);
+        readAvailableModulesResponse.setJsonRawResponse(jsonResponse);
 
         return readAvailableModulesResponse;
     }

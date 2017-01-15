@@ -1,6 +1,7 @@
 package com.sugaronrest.restapicalls.responses;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Map;
 /**
  * Created by kolao_000 on 2017-01-09.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class LinkedRecordItem {
     /// <summary>
     /// Gets or sets the json link value.

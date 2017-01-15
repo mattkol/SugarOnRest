@@ -1,5 +1,6 @@
 package com.sugaronrest.restapicalls.responses;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 /**
  * Created by kolao_000 on 2017-01-09.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class LinkedListModule {
 
     @JsonProperty("link_list")

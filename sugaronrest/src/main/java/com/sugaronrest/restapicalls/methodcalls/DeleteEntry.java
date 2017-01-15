@@ -31,6 +31,8 @@ public class DeleteEntry {
     public static DeleteEntryResponse run(String url, String sessionId, String moduleName, String id)  {
 
         DeleteEntryResponse deleteEntryResponse = null;
+        ErrorResponse errorResponse = null;
+
         String jsonRequest = new String();
         String jsonResponse = new String();
 
@@ -58,42 +60,39 @@ public class DeleteEntry {
                     .fields(request)
                     .asString();
 
-            if (response == null)
-            {
+            if (response == null) {
                 deleteEntryResponse = new DeleteEntryResponse();
-                ErrorResponse errorResponse = ErrorResponse.format("An error has occurred!", "No data returned.");
+                errorResponse = ErrorResponse.format("An error has occurred!", "No data returned.");
                 deleteEntryResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
                 deleteEntryResponse.setError(errorResponse);
-            }
+            } else {
 
-            jsonResponse = response.getBody().toString();
+                jsonResponse = response.getBody().toString();
 
-            if (StringUtils.isNotBlank(jsonResponse)) {
-                try {
-                    deleteEntryResponse = mapper.readValue(jsonResponse, DeleteEntryResponse.class);
+                if (StringUtils.isNotBlank(jsonResponse)) {
+                    // First check if we have an error
+                    errorResponse = ErrorResponse.fromJson(jsonResponse);
+                    if (errorResponse == null) {
+                        deleteEntryResponse = mapper.readValue(jsonResponse, DeleteEntryResponse.class);
+                    }
                 }
-                catch (Exception exception)
-                {
-                    ErrorResponse errorResponse = mapper.readValue(jsonResponse, ErrorResponse.class);
-                    errorResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
-                    errorResponse.setTrace(exception);
+
+                if (deleteEntryResponse == null) {
                     deleteEntryResponse = new DeleteEntryResponse();
-                    deleteEntryResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
                     deleteEntryResponse.setError(errorResponse);
-                }
-            }
 
-            if (deleteEntryResponse == null) {
-                deleteEntryResponse = new DeleteEntryResponse();
-                String message = String.format("Object type %S to json conversion failed - response data is invalid!", deleteEntryResponse.getClass().getSimpleName());
-                ErrorResponse errorResponse = ErrorResponse.format("An error has occurred!", message);
-                deleteEntryResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
-                deleteEntryResponse.setError(errorResponse);
+                    deleteEntryResponse.setStatusCode(HttpStatus.SC_OK);
+                    if (errorResponse != null) {
+                        deleteEntryResponse.setStatusCode(errorResponse.getStatusCode());
+                    }
+                } else {
+                    deleteEntryResponse.setStatusCode(HttpStatus.SC_OK);
+                }
             }
         }
         catch (Exception exception) {
             deleteEntryResponse = new DeleteEntryResponse();
-            ErrorResponse errorResponse = ErrorResponse.format(exception, exception.getMessage());
+            errorResponse = ErrorResponse.format(exception, exception.getMessage());
             deleteEntryResponse.setStatusCode(HttpStatus.SC_INTERNAL_SERVER_ERROR);
             errorResponse.setStatusCode(HttpStatus.SC_INTERNAL_SERVER_ERROR);
             deleteEntryResponse.setError(errorResponse);

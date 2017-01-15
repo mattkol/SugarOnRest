@@ -1,6 +1,7 @@
 package com.sugaronrest.restapicalls;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sugaronrest.utils.ModuleMapper;
 import com.sugaronrest.utils.Utils;
 import org.apache.commons.lang.StringUtils;
 
@@ -56,53 +57,15 @@ public class ModuleInfo {
         return moduleInfo;
     }
 
-    public static String readNameFromType(Type type) throws IOException, ClassNotFoundException {
-        ClassLoader classLoader = ModuleInfo.class.getClassLoader();
-        String refClassName = getClassName(type);
-        List<String> classNames = Utils.getModuleClassNames(PackagePath);
-        if ((classNames != null) && (classNames.size() > 0)) {
-            for(String item : classNames){
-                if (refClassName.equalsIgnoreCase(item.trim())) {
-                    Class moduleClass = Class.forName(PackageName + "." + refClassName, false, classLoader);
-                    Annotation[] moduleAnnotations = moduleClass.getAnnotations();
-                    for(Annotation annotation : moduleAnnotations){
-                        if(annotation instanceof Module){
-                            Module module = (Module)annotation;
-                            return module.name();
-                        }
-                    }
-                    break;
-                }
-            }
+    public static Class readClassFromName(String moduleName) {
+        try {
+
+            ClassLoader classLoader = ModuleInfo.class.getClassLoader();
+            return Class.forName(PackageName + "." + moduleName, false, classLoader);
+
+        } catch (ClassNotFoundException e) {
+            return null;
         }
-
-        return StringUtils.EMPTY;
-    }
-
-    public static Class readClassFromName(String moduleName) throws IOException, ClassNotFoundException {
-
-        ClassLoader classLoader = ModuleInfo.class.getClassLoader();
-        List<String> classNames = Utils.getModuleClassNames(PackagePath);
-        if ((classNames != null) && (classNames.size() > 0)) {
-            for(String item : classNames){
-                Class moduleClass = Class.forName(PackageName + "." + item.trim(), false, classLoader);
-                Annotation[] moduleAnnotations = moduleClass.getAnnotations();
-
-                String currentName = StringUtils.EMPTY;
-                for(Annotation annotation : moduleAnnotations){
-                    if(annotation instanceof Module){
-                        Module module = (Module)annotation;
-                        currentName = module.name();
-                    }
-                }
-
-                if (currentName.equalsIgnoreCase(moduleName)) {
-                    return moduleClass;
-                }
-            }
-        }
-
-        return null;
     }
 
     public List<String> getJsonPropertyNames() {
@@ -117,6 +80,20 @@ public class ModuleInfo {
         }
 
         return jsonNames;
+    }
+
+    public static String getClassName(Type type) {
+        if (type == null) {
+            return StringUtils.EMPTY;
+        }
+        String typeToString =  type.toString();
+        typeToString = typeToString.trim();
+        String[] splitArray = typeToString.split("\\.");
+        if (splitArray.length > 0) {
+            return splitArray[splitArray.length - 1];
+        }
+
+        return StringUtils.EMPTY;
     }
 
     /**
@@ -218,20 +195,6 @@ public class ModuleInfo {
         }
 
         return modelProperties;
-    }
-
-    private static String getClassName(Type type) {
-        if (type == null) {
-            return StringUtils.EMPTY;
-        }
-        String typeToString =  type.toString();
-        typeToString = typeToString.trim();
-        String[] splitArray = typeToString.split("\\.");
-        if (splitArray.length > 0) {
-            return splitArray[splitArray.length - 1];
-        }
-
-        return StringUtils.EMPTY;
     }
 
     private static String getClassName(String moduleName) {

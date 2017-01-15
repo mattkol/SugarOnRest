@@ -2,6 +2,7 @@ package com.sugaronrest.restapicalls.responses;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,6 +23,7 @@ import java.util.Map;
         "result_count",
         "next_offset"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ReadLinkedEntryListResponse  extends BaseResponse {
     /**
      * Gets or sets the number of entries returned

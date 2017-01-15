@@ -1,11 +1,13 @@
 package com.sugaronrest.restapicalls.responses;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 /**
  * Created by kolao_000 on 2016-12-24.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class EnityItem {
 
     private String name = new String();

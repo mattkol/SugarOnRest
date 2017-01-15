@@ -5,7 +5,9 @@ import com.mysql.jdbc.StringUtils;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by kolao_000 on 2016-12-29.
@@ -112,5 +114,39 @@ public class SchemaReader {
         }
 
         return columns;
+    }
+
+    public Map<String, String> getAllModules(Account account) {
+        Map<String, String> tableModuleMap = new HashMap<String, String>();
+
+        try
+        {
+            ResultSet resultSet = DataAccess.getRelationshipResultSet(account);
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            System.out.println(columnCount);
+            System.out.println("");
+
+            while (resultSet.next()) {
+                // LHS_MODULE, LHS_TABLE, RHS_MODULE, RHS_TABLE
+                String lhs_module = resultSet.getString("LHS_MODULE");
+                String lhs_table = resultSet.getString("LHS_TABLE");
+                String rhs_module = resultSet.getString("RHS_MODULE");
+                String rhs_table = resultSet.getString("RHS_TABLE");
+
+                if (!tableModuleMap.containsKey(lhs_table)) {
+                    tableModuleMap.put(lhs_table, lhs_module);
+                }
+
+                if (!tableModuleMap.containsKey(rhs_table)) {
+                    tableModuleMap.put(rhs_table, rhs_module);
+                }
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return tableModuleMap;
     }
 }

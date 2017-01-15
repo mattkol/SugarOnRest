@@ -22,12 +22,14 @@ public class GetEntry {
     /**
      * Login to SugarCrm via REST API call
      *
-     *  @param sessionId LoginRequest object
-     *  @return LoginResponse object
+     * @param sessionId LoginRequest object
+     * @return LoginResponse object
      */
-    public static ReadEntryResponse run(String url, String sessionId, String moduleName, String identifier, List<String> selectFields)  {
+    public static ReadEntryResponse run(String url, String sessionId, String moduleName, String identifier, List<String> selectFields) {
 
         ReadEntryResponse readEntryResponse = null;
+        ErrorResponse errorResponse = null;
+
         String jsonRequest = new String();
         String jsonResponse = new String();
 
@@ -58,42 +60,38 @@ public class GetEntry {
                     .fields(request)
                     .asString();
 
-            if (response == null)
-            {
+            if (response == null) {
                 readEntryResponse = new ReadEntryResponse();
-                ErrorResponse errorResponse = ErrorResponse.format("An error has occurred!", "No data returned.");
+                errorResponse = ErrorResponse.format("An error has occurred!", "No data returned.");
                 readEntryResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
                 readEntryResponse.setError(errorResponse);
-            }
+            } else {
 
-            jsonResponse = response.getBody().toString();
+                jsonResponse = response.getBody().toString();
 
-            if (StringUtils.isNotBlank(jsonResponse)) {
-                try {
-                    readEntryResponse = mapper.readValue(jsonResponse, ReadEntryResponse.class);
+                if (StringUtils.isNotBlank(jsonResponse)) {
+                    // First check if we have an error
+                    errorResponse = ErrorResponse.fromJson(jsonResponse);
+                    if (errorResponse == null) {
+                        readEntryResponse = mapper.readValue(jsonResponse, ReadEntryResponse.class);
+                    }
                 }
-                catch (Exception exception)
-                {
-                    ErrorResponse errorResponse = mapper.readValue(jsonResponse, ErrorResponse.class);
-                    errorResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
-                    errorResponse.setTrace(exception);
+
+                if (readEntryResponse == null) {
                     readEntryResponse = new ReadEntryResponse();
-                    readEntryResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
                     readEntryResponse.setError(errorResponse);
+
+                    readEntryResponse.setStatusCode(HttpStatus.SC_OK);
+                    if (errorResponse == null) {
+                        errorResponse.setStatusCode(errorResponse.getStatusCode());
+                    }
+                } else {
+                    readEntryResponse.setStatusCode(HttpStatus.SC_OK);
                 }
             }
-
-            if (readEntryResponse == null) {
-                readEntryResponse = new ReadEntryResponse();
-                String message = String.format("Object type %S to json conversion failed - response data is invalid!", readEntryResponse.getClass().getSimpleName());
-                ErrorResponse errorResponse = ErrorResponse.format("An error has occurred!", message);
-                readEntryResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
-                readEntryResponse.setError(errorResponse);
-            }
-        }
-        catch (Exception exception) {
+        } catch (Exception exception) {
             readEntryResponse = new ReadEntryResponse();
-            ErrorResponse errorResponse = ErrorResponse.format(exception, exception.getMessage());
+            errorResponse = ErrorResponse.format(exception, exception.getMessage());
             readEntryResponse.setStatusCode(HttpStatus.SC_INTERNAL_SERVER_ERROR);
             errorResponse.setStatusCode(HttpStatus.SC_INTERNAL_SERVER_ERROR);
             readEntryResponse.setError(errorResponse);

@@ -9,10 +9,7 @@ import org.stringtemplate.v4.STGroupFile;
 
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /**
  * Created by kolao_000 on 2016-12-21.
@@ -41,14 +38,25 @@ public class SchemaReaderTests {
     }
 
     @Test
-    public void generateModuleTest() throws Exception {
+    public void generateModulesTest() throws Exception {
 
+        Map<String, String> allModules = readAllModules();
         List<Table> tableList = getTables();
         for (Table table : tableList) {
             String folder = "C:\\Logs\\SugarCrm";
-            String joinedPath = new File(folder,  table.getClassName() + ".java").toString();
 
-            String classContent = getClassContent(table);
+            String tablename = table.getName();
+            String className = Utils.toPascalCase(table.getName());
+            String modulename = "";
+
+            if (allModules.containsKey(tablename)) {
+                className = allModules.get(tablename);
+                modulename = className;
+            }
+
+            String joinedPath = new File(folder,  className + ".java").toString();
+
+            String classContent = getClassContent(table, className, modulename);
 
             File file = new File(joinedPath);
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
@@ -121,8 +129,60 @@ public class SchemaReaderTests {
         template = group.getInstanceOf("classEnd");
         stringBuilder.append(template.render());
 
-        String folder = "C:\\Logs\\NameOf";
+        String folder = "C:\\Logs\\Util";
         String joinedPath = new File(folder,  "NameOf.java").toString();
+
+        File file = new File(joinedPath);
+        FileWriter fw = new FileWriter(file.getAbsoluteFile());
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(stringBuilder.toString());
+        bw.close();
+    }
+
+    @Test
+    public void generateModuleMapperTest() throws Exception {
+
+        ClassLoader loader = this.getClass().getClassLoader();
+        URL templateUrl = loader.getResource("ModuleMapperTemplate.stg");
+        StringBuilder stringBuilder = new StringBuilder();
+
+        STGroupFile group = new STGroupFile(templateUrl.getPath());
+
+        // Class comment start
+        ST template = group.getInstanceOf("packageAndImport");
+        stringBuilder.append(template.render());
+        stringBuilder.append(Utils.NewLine);
+
+        // Class start
+        template = group.getInstanceOf("classStart");
+        stringBuilder.append(template.render());
+        stringBuilder.append(Utils.NewLine);
+
+        Map<String, String> allModules = readAllModules();
+        List<Table> tableList = getTables();
+        for (Table table : tableList) {
+            String tablename = table.getName();
+            String modulename = Utils.toPascalCase(table.getName());
+
+            if (allModules.containsKey(tablename)) {
+                modulename = allModules.get(tablename);
+
+                // Add to map
+                template = group.getInstanceOf("addToMap");
+                template.add("tablename", tablename);
+                template.add("modulename", modulename);
+                stringBuilder.append(template.render());
+
+                stringBuilder.append(Utils.NewLine);
+            }
+        }
+
+        // Class end
+        template = group.getInstanceOf("classEnd");
+        stringBuilder.append(template.render());
+
+        String folder = "C:\\Logs\\Util";
+        String joinedPath = new File(folder,  "ModuleMapper.java").toString();
 
         File file = new File(joinedPath);
         FileWriter fw = new FileWriter(file.getAbsoluteFile());
@@ -167,9 +227,16 @@ public class SchemaReaderTests {
     }
 
 
-    @After
-    public void tearDown() throws Exception {
+    public Map<String, String> readAllModules()  {
+        Account account = new Account();
+        account.setUsername("root");
+        account.setPassword("pass4word01");
 
+        SchemaReader schemaReader = new SchemaReader();
+        Map<String, String> tableModuleMap = schemaReader.getAllModules(account);
+
+        System.out.println("Module count:::::::: " + tableModuleMap.size());
+        return tableModuleMap;
     }
 
     private List<Table> getTables() {
@@ -182,7 +249,7 @@ public class SchemaReaderTests {
         return schemaReader.getSchemaTables(account);
     }
 
-    private String getClassContent(Table table) throws Exception {
+    private String getClassContent(Table table, String className, String modulename) throws Exception {
 
         ClassLoader loader = this.getClass().getClassLoader();
         URL templateUrl = loader.getResource("ModuleTemplate.stg");
@@ -221,8 +288,8 @@ public class SchemaReaderTests {
 
         // Class start
         template = group.getInstanceOf("classStart");
-        template.add("name", table.getClassName());
-        template.add("modulename", Utils.toPascalCase(table.getName()));
+        template.add("name", className);
+        template.add("modulename", modulename);
         template.add("tablename", table.getName());
         stringBuilder.append(template.render());
         stringBuilder.append(Utils.NewLine);

@@ -3,9 +3,12 @@ package com.sugaronrest;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sugaronrest.utils.JsonObjectMapper;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -84,6 +87,29 @@ public class ErrorResponse {
 
     public void setExceptionType(String value) {
         exceptionType = value;
+    }
+
+    /**
+     * Gets formatted error response based on UniRest error
+     *
+     * @param jsonResponse Response object from UniRest
+     * @return ErrorResponse object
+     */
+    public static ErrorResponse fromJson(String jsonResponse) {
+        ObjectMapper mapper = JsonObjectMapper.getMapper();
+        try {
+            ErrorResponse errorResponse = mapper.readValue(jsonResponse, ErrorResponse.class);
+            if (errorResponse != null) {
+                if (errorResponse.getNumber() <= 0) {
+                    return null;
+                }
+            }
+
+            errorResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
+            return errorResponse;
+        } catch (IOException e) {
+            return null;
+        }
     }
 
     /**

@@ -15,6 +15,7 @@ import java.util.Map;
         "name",
         "records"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class LinkedModuleData {
 
     @JsonProperty("name")

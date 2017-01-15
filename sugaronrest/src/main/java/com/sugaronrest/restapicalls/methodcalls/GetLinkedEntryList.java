@@ -28,6 +28,8 @@ public class GetLinkedEntryList {
     public static ReadLinkedEntryListResponse run(String url, String sessionId, String moduleName, List<String> selectFields, List<Object> linkedSelectFields, String queryString, int maxCountResult) throws Exception {
 
         ReadLinkedEntryListResponse readLinkedEntryListResponse = null;
+        ErrorResponse errorResponse = null;
+
         String jsonRequest = new String();
         String jsonResponse = new String();
 
@@ -63,42 +65,39 @@ public class GetLinkedEntryList {
                     .fields(request)
                     .asJson();
 
-            if (response == null)
-            {
+            if (response == null) {
                 readLinkedEntryListResponse = new ReadLinkedEntryListResponse();
-                ErrorResponse errorResponse = ErrorResponse.format("An error has occurred!", "No data returned.");
+                errorResponse = ErrorResponse.format("An error has occurred!", "No data returned.");
                 readLinkedEntryListResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
                 readLinkedEntryListResponse.setError(errorResponse);
-            }
+            } else {
 
-            jsonResponse = response.getBody().toString();
+                jsonResponse = response.getBody().toString();
 
-            if (StringUtils.isNotBlank(jsonResponse)) {
-                try {
-                    readLinkedEntryListResponse = mapper.readValue(jsonResponse, ReadLinkedEntryListResponse.class);
+                if (StringUtils.isNotBlank(jsonResponse)) {
+                    // First check if we have an error
+                    errorResponse = ErrorResponse.fromJson(jsonResponse);
+                    if (errorResponse == null) {
+                        readLinkedEntryListResponse = mapper.readValue(jsonResponse, ReadLinkedEntryListResponse.class);
+                    }
                 }
-                catch (Exception exception)
-                {
-                    ErrorResponse errorResponse = mapper.readValue(jsonResponse, ErrorResponse.class);
-                    errorResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
-                    errorResponse.setTrace(exception);
+
+                if (readLinkedEntryListResponse == null) {
                     readLinkedEntryListResponse = new ReadLinkedEntryListResponse();
-                    readLinkedEntryListResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
                     readLinkedEntryListResponse.setError(errorResponse);
-                }
-            }
 
-            if (readLinkedEntryListResponse == null) {
-                readLinkedEntryListResponse = new ReadLinkedEntryListResponse();
-                String message = String.format("Object type %S to json conversion failed - response data is invalid!", readLinkedEntryListResponse.getClass().getSimpleName());
-                ErrorResponse errorResponse = ErrorResponse.format("An error has occurred!", message);
-                readLinkedEntryListResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
-                readLinkedEntryListResponse.setError(errorResponse);
+                    readLinkedEntryListResponse.setStatusCode(HttpStatus.SC_OK);
+                    if (errorResponse != null) {
+                        readLinkedEntryListResponse.setStatusCode(errorResponse.getStatusCode());
+                    }
+                } else {
+                    readLinkedEntryListResponse.setStatusCode(HttpStatus.SC_OK);
+                }
             }
         }
         catch (Exception exception) {
             readLinkedEntryListResponse = new ReadLinkedEntryListResponse();
-            ErrorResponse errorResponse = ErrorResponse.format(exception, exception.getMessage());
+            errorResponse = ErrorResponse.format(exception, exception.getMessage());
             readLinkedEntryListResponse.setStatusCode(HttpStatus.SC_INTERNAL_SERVER_ERROR);
             errorResponse.setStatusCode(HttpStatus.SC_INTERNAL_SERVER_ERROR);
             readLinkedEntryListResponse.setError(errorResponse);

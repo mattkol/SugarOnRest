@@ -1,9 +1,6 @@
 package com.sugaronrest.restapicalls.responses;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sugaronrest.utils.JsonObjectMapper;
 
@@ -16,6 +13,7 @@ import java.util.Map;
  * Represents EntryList class
  */
 @JsonRootName(value = "entry_list")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class EntryList
 {
     /**

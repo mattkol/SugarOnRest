@@ -11,7 +11,7 @@ templateComment() ::= <<
 * https://github.com/antlr/antlrcs
 *
 * @author  Kola Oyewumi
-* @version 1.0
+* @version 1.0.0
 * @since   2017-01-03
 *
 * A class which represents the NameOf class - this is used to get the json field names of

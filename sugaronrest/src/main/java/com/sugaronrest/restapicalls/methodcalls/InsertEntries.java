@@ -29,6 +29,8 @@ public class InsertEntries {
     public static InsertEntriesResponse run(String url, String sessionId, String moduleName, List<Object> entities, List<String> selectFields)  {
 
         InsertEntriesResponse insertEntriesResponse = null;
+        ErrorResponse errorResponse = null;
+
         String jsonRequest = new String();
         String jsonResponse = new String();
 
@@ -56,42 +58,39 @@ public class InsertEntries {
                     .fields(request)
                     .asString();
 
-            if (response == null)
-            {
+            if (response == null) {
                 insertEntriesResponse = new InsertEntriesResponse();
-                ErrorResponse errorResponse = ErrorResponse.format("An error has occurred!", "No data returned.");
+                errorResponse = ErrorResponse.format("An error has occurred!", "No data returned.");
                 insertEntriesResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
                 insertEntriesResponse.setError(errorResponse);
-            }
+            } else {
 
-            jsonResponse = response.getBody().toString();
+                jsonResponse = response.getBody().toString();
 
-            if (StringUtils.isNotBlank(jsonResponse)) {
-                try {
-                    insertEntriesResponse = mapper.readValue(jsonResponse, InsertEntriesResponse.class);
+                if (StringUtils.isNotBlank(jsonResponse)) {
+                    // First check if we have an error
+                    errorResponse = ErrorResponse.fromJson(jsonResponse);
+                    if (errorResponse == null) {
+                        insertEntriesResponse = mapper.readValue(jsonResponse, InsertEntriesResponse.class);
+                    }
                 }
-                catch (Exception exception)
-                {
-                    ErrorResponse errorResponse = mapper.readValue(jsonResponse, ErrorResponse.class);
-                    errorResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
-                    errorResponse.setTrace(exception);
+
+                if (insertEntriesResponse == null) {
                     insertEntriesResponse = new InsertEntriesResponse();
-                    insertEntriesResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
                     insertEntriesResponse.setError(errorResponse);
-                }
-            }
 
-            if (insertEntriesResponse == null) {
-                insertEntriesResponse = new InsertEntriesResponse();
-                String message = String.format("Object type %S to json conversion failed - response data is invalid!", insertEntriesResponse.getClass().getSimpleName());
-                ErrorResponse errorResponse = ErrorResponse.format("An error has occurred!", message);
-                insertEntriesResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
-                insertEntriesResponse.setError(errorResponse);
+                    insertEntriesResponse.setStatusCode(HttpStatus.SC_OK);
+                    if (errorResponse != null) {
+                        insertEntriesResponse.setStatusCode(errorResponse.getStatusCode());
+                    }
+                } else {
+                    insertEntriesResponse.setStatusCode(HttpStatus.SC_OK);
+                }
             }
         }
         catch (Exception exception) {
             insertEntriesResponse = new InsertEntriesResponse();
-            ErrorResponse errorResponse = ErrorResponse.format(exception, exception.getMessage());
+            errorResponse = ErrorResponse.format(exception, exception.getMessage());
             insertEntriesResponse.setStatusCode(HttpStatus.SC_INTERNAL_SERVER_ERROR);
             errorResponse.setStatusCode(HttpStatus.SC_INTERNAL_SERVER_ERROR);
             insertEntriesResponse.setError(errorResponse);

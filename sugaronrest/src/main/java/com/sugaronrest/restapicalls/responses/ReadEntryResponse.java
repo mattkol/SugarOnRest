@@ -1,6 +1,7 @@
 package com.sugaronrest.restapicalls.responses;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Represents ReadEntryResponse class
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ReadEntryResponse  extends BaseResponse
 {
     @JsonProperty("entry_list")

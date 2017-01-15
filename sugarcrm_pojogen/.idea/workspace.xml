@@ -20,8 +20,8 @@
       <file leaf-file-name="ModuleTemplate.stg" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/ModuleTemplate.stg">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1944">
-              <caret line="72" column="8" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="8" />
+            <state relative-caret-position="-135">
+              <caret line="13" column="16" lean-forward="false" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -30,32 +30,31 @@
       <file leaf-file-name="NameOfTemplate.stg" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/NameOfTemplate.stg">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="972">
-              <caret line="36" column="8" lean-forward="false" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
+            <state relative-caret-position="351">
+              <caret line="13" column="16" lean-forward="false" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SchemaReaderTests.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ModuleMapperTemplate.stg" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/ModuleMapperTemplate.stg">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="316">
+              <caret line="40" column="50" lean-forward="false" selection-start-line="40" selection-start-column="50" selection-end-line="40" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SchemaReaderTests.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/test/SchemaReaderTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2295">
-              <caret line="97" column="39" lean-forward="false" selection-start-line="97" selection-start-column="39" selection-end-line="97" selection-end-column="39" />
+            <state relative-caret-position="630">
+              <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#4843#4851#0" expanded="false" />
+                <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="11" column="10" lean-forward="false" selection-start-line="8" selection-start-column="18" selection-end-line="11" selection-end-column="10" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -70,12 +69,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GenericTemplateTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GenericTemplateTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/test/GenericTemplateTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="567">
+            <state relative-caret-position="-424">
               <caret line="87" column="7" lean-forward="false" selection-start-line="87" selection-start-column="7" selection-end-line="87" selection-end-column="45" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GenericType.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/test/GenericType.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="8" column="5" lean-forward="false" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+              <folding>
+                <element signature="e#210#211#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -83,14 +94,32 @@
       <file leaf-file-name="SchemaReader.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/sugarcrm/pojogen/SchemaReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2700">
-              <caret line="105" column="87" lean-forward="false" selection-start-line="105" selection-start-column="87" selection-end-line="105" selection-end-column="87" />
+            <state relative-caret-position="372">
+              <caret line="130" column="19" lean-forward="false" selection-start-line="130" selection-start-column="19" selection-end-line="130" selection-end-column="62" />
               <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#358#365#0" expanded="false" />
-                <element signature="e#1451#1459#0" expanded="false" />
-                <element signature="e#2344#2352#0" expanded="false" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#4417#4433#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Column.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/sugarcrm/pojogen/Column.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="621">
+              <caret line="31" column="37" lean-forward="false" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataAccess.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/sugarcrm/pojogen/DataAccess.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="45" column="35" lean-forward="false" selection-start-line="45" selection-start-column="35" selection-end-line="45" selection-end-column="35" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -108,6 +137,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>getInteger</find>
+      <find>readAllModules</find>
+      <find>getClassContent</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -119,13 +150,11 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/sugarcrm/pojogen/Account.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sugarcrm/pojogen/DataAccess.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/test/DataAccessTests.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/SchemaReaderTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sugarcrm/pojogen/Table.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/test/ClassTypes.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sugarcrm/pojogen/Column.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sugarcrm/pojogen/SchemaReader.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sugarcrm/pojogen/Utils.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/test/BookLibrary.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/test/Vehicle.java" />
@@ -133,10 +162,14 @@
         <option value="$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/test/GenericType.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/test/Library.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/test/GenericTemplateTest.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sugarcrm/pojogen/SchemaReader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sugarcrm/pojogen/DataAccess.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/ModuleMapper.stg" />
         <option value="$PROJECT_DIR$/src/main/resources/ModuleTemplate.stg" />
         <option value="$PROJECT_DIR$/src/main/resources/NameOfTemplate.stg" />
+        <option value="$PROJECT_DIR$/src/main/resources/ModuleMapperTemplate.stg" />
         <option value="$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/test/SchemaReaderTests.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -333,7 +366,7 @@
       <recent name="C:\Projects\ProjectDurbar\sugarcrm_pojogen\src\main\java\com\sugarcrm\pojogen" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SchemaReaderTests.generateNameOfClassTest">
+  <component name="RunManager" selected="JUnit.SchemaReaderTests.generateModulesTest">
     <configuration default="false" name="SchemaReaderTests.generateModuleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -360,84 +393,6 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="SchemaReaderTests.fileReaderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.sugarcrm.pojogen.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="sugarcrm_pojogen" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.sugarcrm.pojogen.test" />
-      <option name="MAIN_CLASS_NAME" value="com.sugarcrm.pojogen.test.SchemaReaderTests" />
-      <option name="METHOD_NAME" value="fileReaderTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="GenericTemplateTest.generateModuleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.sugarcrm.pojogen.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="sugarcrm_pojogen" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.sugarcrm.pojogen.test" />
-      <option name="MAIN_CLASS_NAME" value="com.sugarcrm.pojogen.test.GenericTemplateTest" />
-      <option name="METHOD_NAME" value="generateModuleTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="GenericTemplateTest.referenceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.sugarcrm.pojogen.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="sugarcrm_pojogen" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.sugarcrm.pojogen.test" />
-      <option name="MAIN_CLASS_NAME" value="com.sugarcrm.pojogen.test.GenericTemplateTest" />
-      <option name="METHOD_NAME" value="referenceTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
     <configuration default="false" name="SchemaReaderTests.generateNameOfClassTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -451,6 +406,84 @@
       <option name="PACKAGE_NAME" value="com.sugarcrm.pojogen.test" />
       <option name="MAIN_CLASS_NAME" value="com.sugarcrm.pojogen.test.SchemaReaderTests" />
       <option name="METHOD_NAME" value="generateNameOfClassTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="SchemaReaderTests.readAllModules" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.sugarcrm.pojogen.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="sugarcrm_pojogen" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.sugarcrm.pojogen.test" />
+      <option name="MAIN_CLASS_NAME" value="com.sugarcrm.pojogen.test.SchemaReaderTests" />
+      <option name="METHOD_NAME" value="readAllModules" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="SchemaReaderTests.generateModuleMapperTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.sugarcrm.pojogen.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="sugarcrm_pojogen" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.sugarcrm.pojogen.test" />
+      <option name="MAIN_CLASS_NAME" value="com.sugarcrm.pojogen.test.SchemaReaderTests" />
+      <option name="METHOD_NAME" value="generateModuleMapperTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="SchemaReaderTests.generateModulesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.sugarcrm.pojogen.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="sugarcrm_pojogen" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.sugarcrm.pojogen.test" />
+      <option name="MAIN_CLASS_NAME" value="com.sugarcrm.pojogen.test.SchemaReaderTests" />
+      <option name="METHOD_NAME" value="generateModulesTest" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -670,18 +703,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="JUnit.SchemaReaderTests.generateModuleTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.SchemaReaderTests.fileReaderTest" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.GenericTemplateTest.generateModuleTest" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.GenericTemplateTest.referenceTest" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.SchemaReaderTests.generateNameOfClassTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.SchemaReaderTests.generateNameOfClassTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.SchemaReaderTests.readAllModules" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.SchemaReaderTests.generateModuleMapperTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.SchemaReaderTests.generateModulesTest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.SchemaReaderTests.generateNameOfClassTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.SchemaReaderTests.generateModuleTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.GenericTemplateTest.generateModuleTest" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.GenericTemplateTest.referenceTest" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.SchemaReaderTests.fileReaderTest" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.SchemaReaderTests.generateModulesTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.SchemaReaderTests.generateModuleMapperTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.SchemaReaderTests.readAllModules" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.SchemaReaderTests.generateNameOfClassTest" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.SchemaReaderTests.generateModuleTest" />
       </list>
     </recent_temporary>
   </component>
@@ -699,51 +732,52 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="SchemaReaderTests_generateModuleTest - 2017.01.07 at 18h 08m 42s.xml">
-      <configuration name="SchemaReaderTests.generateModuleTest" configurationId="JUnit" />
+    <history-entry file="SchemaReaderTests_generateModuleMapperTest - 2017.01.15 at 09h 19m 08s.xml">
+      <configuration name="SchemaReaderTests.generateModuleMapperTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SchemaReaderTests_generateModuleTest - 2017.01.07 at 18h 09m 40s.xml">
-      <configuration name="SchemaReaderTests.generateModuleTest" configurationId="JUnit" />
+    <history-entry file="SchemaReaderTests_generateModuleMapperTest - 2017.01.15 at 13h 26m 41s.xml">
+      <configuration name="SchemaReaderTests.generateModuleMapperTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SchemaReaderTests_generateNameOfClassTest - 2017.01.07 at 18h 41m 43s.xml">
-      <configuration name="SchemaReaderTests.generateNameOfClassTest" configurationId="JUnit" />
+    <history-entry file="SchemaReaderTests_generateModulesTest - 2017.01.15 at 09h 26m 14s.xml">
+      <configuration name="SchemaReaderTests.generateModulesTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SchemaReaderTests_generateNameOfClassTest - 2017.01.07 at 18h 42m 23s.xml">
-      <configuration name="SchemaReaderTests.generateNameOfClassTest" configurationId="JUnit" />
+    <history-entry file="SchemaReaderTests_generateModulesTest - 2017.01.15 at 09h 38m 35s.xml">
+      <configuration name="SchemaReaderTests.generateModulesTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SchemaReaderTests_generateNameOfClassTest - 2017.01.07 at 18h 43m 07s.xml">
-      <configuration name="SchemaReaderTests.generateNameOfClassTest" configurationId="JUnit" />
+    <history-entry file="SchemaReaderTests_generateModulesTest - 2017.01.15 at 09h 39m 26s.xml">
+      <configuration name="SchemaReaderTests.generateModulesTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SchemaReaderTests_generateNameOfClassTest - 2017.01.07 at 18h 44m 56s.xml">
-      <configuration name="SchemaReaderTests.generateNameOfClassTest" configurationId="JUnit" />
+    <history-entry file="SchemaReaderTests_generateModulesTest - 2017.01.15 at 09h 43m 22s.xml">
+      <configuration name="SchemaReaderTests.generateModulesTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SchemaReaderTests_generateNameOfClassTest - 2017.01.07 at 18h 47m 03s.xml">
-      <configuration name="SchemaReaderTests.generateNameOfClassTest" configurationId="JUnit" />
+    <history-entry file="SchemaReaderTests_generateModulesTest - 2017.01.15 at 09h 43m 50s.xml">
+      <configuration name="SchemaReaderTests.generateModulesTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SchemaReaderTests_generateNameOfClassTest - 2017.01.07 at 18h 49m 04s.xml">
-      <configuration name="SchemaReaderTests.generateNameOfClassTest" configurationId="JUnit" />
+    <history-entry file="SchemaReaderTests_generateModulesTest - 2017.01.15 at 13h 24m 45s.xml">
+      <configuration name="SchemaReaderTests.generateModulesTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SchemaReaderTests_generateNameOfClassTest - 2017.01.07 at 19h 03m 03s.xml">
-      <configuration name="SchemaReaderTests.generateNameOfClassTest" configurationId="JUnit" />
+    <history-entry file="SchemaReaderTests_generateModulesTest - 2017.01.15 at 13h 30m 31s.xml">
+      <configuration name="SchemaReaderTests.generateModulesTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SchemaReaderTests_generateNameOfClassTest - 2017.01.07 at 19h 04m 14s.xml">
-      <configuration name="SchemaReaderTests.generateNameOfClassTest" configurationId="JUnit" />
+    <history-entry file="SchemaReaderTests_generateModulesTest - 2017.01.15 at 13h 34m 10s.xml">
+      <configuration name="SchemaReaderTests.generateModulesTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1056" extended-state="1" />
-    <editor active="true" />
+    <frame x="1912" y="-8" width="1936" height="1056" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287234" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25638297" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17446809" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -759,7 +793,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287234" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -769,7 +802,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -778,34 +811,13 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/NameOfTemplate.stg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="972">
-          <caret line="36" column="8" lean-forward="false" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/test/SchemaReaderTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#4843#4851#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sugarcrm/pojogen/SchemaReader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2835">
           <caret line="105" column="87" lean-forward="false" selection-start-line="105" selection-start-column="87" selection-end-line="105" selection-end-column="87" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#358#365#0" expanded="false" />
-            <element signature="e#1451#1459#0" expanded="false" />
-            <element signature="e#2344#2352#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#4417#4433#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -831,8 +843,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#4843#4851#0" expanded="false" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -842,10 +853,8 @@
         <state relative-caret-position="2700">
           <caret line="105" column="87" lean-forward="false" selection-start-line="105" selection-start-column="87" selection-end-line="105" selection-end-column="87" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#358#365#0" expanded="false" />
-            <element signature="e#1451#1459#0" expanded="false" />
-            <element signature="e#2344#2352#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#4417#4433#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -871,8 +880,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#4843#4851#0" expanded="false" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -882,10 +890,8 @@
         <state relative-caret-position="2835">
           <caret line="105" column="87" lean-forward="false" selection-start-line="105" selection-start-column="87" selection-end-line="105" selection-end-column="87" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#358#365#0" expanded="false" />
-            <element signature="e#1451#1459#0" expanded="false" />
-            <element signature="e#2344#2352#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#4417#4433#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -923,10 +929,8 @@
         <state relative-caret-position="2700">
           <caret line="105" column="87" lean-forward="false" selection-start-line="105" selection-start-column="87" selection-end-line="105" selection-end-column="87" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#358#365#0" expanded="false" />
-            <element signature="e#1451#1459#0" expanded="false" />
-            <element signature="e#2344#2352#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#4417#4433#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -951,8 +955,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#4843#4851#0" expanded="false" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1004,10 +1007,8 @@
         <state relative-caret-position="1431">
           <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#358#365#0" expanded="false" />
-            <element signature="e#1451#1459#0" expanded="false" />
-            <element signature="e#2344#2352#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#4417#4433#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1039,8 +1040,7 @@
         <state relative-caret-position="972">
           <caret line="48" column="13" lean-forward="false" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#4843#4851#0" expanded="false" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1073,20 +1073,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sugarcrm/pojogen/DataAccess.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sugarcrm/pojogen/Column.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
-          <caret line="31" column="37" lean-forward="false" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/test/BookLibrary.java" />
     <entry file="file://$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/test/ClassTypes.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1116,13 +1102,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/test/GenericType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" column="5" lean-forward="true" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/test/Library.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="901">
@@ -1130,47 +1109,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sugarcrm/pojogen/SchemaReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2700">
-          <caret line="105" column="87" lean-forward="false" selection-start-line="105" selection-start-column="87" selection-end-line="105" selection-end-column="87" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#358#365#0" expanded="false" />
-            <element signature="e#1451#1459#0" expanded="false" />
-            <element signature="e#2344#2352#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/NameOfTemplate.stg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="972">
-          <caret line="36" column="8" lean-forward="false" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/ModuleTemplate.stg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1944">
-          <caret line="72" column="8" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../sugaronrest/sugaronrest.iml" />
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/test/SchemaReaderTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2295">
-          <caret line="97" column="39" lean-forward="false" selection-start-line="97" selection-start-column="39" selection-end-line="97" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#4843#4851#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
@@ -1187,11 +1126,90 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sugarcrm/pojogen/Column.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="31" column="37" lean-forward="false" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/test/GenericType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="8" column="5" lean-forward="false" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+          <folding>
+            <element signature="e#210#211#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/test/GenericTemplateTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
+        <state relative-caret-position="-424">
           <caret line="87" column="7" lean-forward="false" selection-start-line="87" selection-start-column="7" selection-end-line="87" selection-end-column="45" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sugarcrm/pojogen/SchemaReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="130" column="19" lean-forward="false" selection-start-line="130" selection-start-column="19" selection-end-line="130" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4417#4433#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sugarcrm/pojogen/DataAccess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="45" column="35" lean-forward="false" selection-start-line="45" selection-start-column="35" selection-end-line="45" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/ModuleMapping/stg.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="5" column="16" lean-forward="false" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/NameOfTemplate.stg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="13" column="16" lean-forward="false" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/ModuleTemplate.stg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-135">
+          <caret line="13" column="16" lean-forward="false" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/ModuleMapperTemplate.stg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="40" column="50" lean-forward="false" selection-start-line="40" selection-start-column="50" selection-end-line="40" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/sugarcrm/pojogen/test/SchemaReaderTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

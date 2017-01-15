@@ -40,6 +40,20 @@ public final class DataAccess {
         return null;
     }
 
+    public static ResultSet getRelationshipResultSet(Account account)  {
+        try
+        {
+            String query = 	"SELECT LHS_MODULE, LHS_TABLE, RHS_MODULE, RHS_TABLE FROM sugarcrm.relationships ";
+
+            return getResultSet(account, query);
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     private static ResultSet getResultSet(Account account, String query)  {
         try
         {

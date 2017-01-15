@@ -278,7 +278,7 @@ public class SugarRestRequest {
         }
 
         if (type != null ) {
-            String moduleName = ModuleInfo.readNameFromType(type);
+            String moduleName = ModuleInfo.getClassName(type);
             if (!StringUtils.isNotBlank(moduleName)) {
                 builder.append(ErrorCodes.ModuleTypeInvalid);
                 builder.append("\n");
