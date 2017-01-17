@@ -15,19 +15,19 @@ string sugarCrmPassword = "will";
 
 SugarRestClient client = new SugarRestClient(sugarCrmUrl, sugarCrmUsername, sugarCrmPassword);
 
-// Option 1 - Read by known type Accounts.
+// Option 1 - Read by known Java Pojo type - Accounts.
 SugarRestRequest accountRequest = new SugarRestRequest(Accounts.class, RequestType.ReadById);
 
 // set the account id to read.
-accountRequest.setId("1f2d3240-0d8a-ca09-2e11-5777c29a4193");
+accountRequest.setParameter("1f2d3240-0d8a-ca09-2e11-5777c29a4193");
 SugarRestResponse accountResponse = client.execute(accountRequest);
 Accounts account = (Accounts)accountResponse.getData();
 
 
 // Option 2 - Read by known SugarCRM module name - "Contacts".
 SugarRestRequest contactRequest = new SugarRestRequest("Contacts", RequestType.ReadById);
-contactRequest.Id = contactid;
-SugarRestResponse contactRresponse = client.Execute(contactRequest);
+contactRequest.setParameter(contactid);
+SugarRestResponse contactRresponse = client.execute(contactRequest);
 Contacts contact = (Contacts)contactRresponse.getData();
 
 ```
