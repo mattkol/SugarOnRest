@@ -1,5 +1,5 @@
 # Being RESTful with SugarCRM in Java 
-SugarOnRest is a Java SugarCRM CE 6.5 API client. SugarOnRest is a UniRest implementation. It is a Restful CRUD client that implements the SugarCRM module Create, Read, Update and Delete functionalities.
+SugarOnRest is a Java SugarCRM CE 6.5 API client. SugarOnRest is a [UniRest Java](https://github.com/Mashape/unirest-java) implementation. It is a Restful CRUD client that implements the SugarCRM module Create, Read, Update and Delete functionalities.
 
 SugarOnRest implements following SugarCRM REST API method calls: **_oauth_access, get_entry, get_entry_list, set_entry, set_entries._**
 
