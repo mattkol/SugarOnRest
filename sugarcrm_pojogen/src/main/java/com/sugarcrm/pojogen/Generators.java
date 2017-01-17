@@ -1,49 +1,50 @@
-package com.sugarcrm.pojogen.test;
+/**
+ MIT License
 
-import com.sugarcrm.pojogen.*;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+ Copyright (c) 2017 Kola Oyewumi
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
+
+package com.sugarcrm.pojogen;
+
 import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroupFile;
 
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
-/**
- * Created by kolao_000 on 2016-12-21.
- */
-public class SchemaReaderTests {
 
-    @Before
-    public void setUp() throws Exception {
+public class Generators {
 
-    }
-
-    @Test
-    public void fileReaderTest() throws IOException {
-
-        ClassLoader loader = this.getClass().getClassLoader();
-        InputStream in = loader.getResourceAsStream("ModuleTemplate.stg");
-
-        URL main = loader.getResource("ModuleTemplate.stg");
-        System.out.println(main.getFile());
-        System.out.println(main.getPath());
-
-        Scanner s = new Scanner(in).useDelimiter("\\A");
-        String result = s.hasNext() ? s.next() : "";
-
-        System.out.println(result);
-    }
-
-    @Test
-    public void generateModulesTest() throws Exception {
+    public static void generateModules(String destFolder) throws Exception {
 
         Map<String, String> allModules = readAllModules();
         List<Table> tableList = getTables();
+        ClassLoader loader = Generators.class.getClassLoader();
+        URL templateUrl = loader.getResource("ModuleTemplate.stg");
+        STGroupFile group = getTemplateGroupFile(templateUrl.getPath());
+
         for (Table table : tableList) {
-            String folder = "C:\\Logs\\SugarCrm";
 
             String tablename = table.getName();
             String className = Utils.toPascalCase(table.getName());
@@ -54,9 +55,10 @@ public class SchemaReaderTests {
                 modulename = className;
             }
 
-            String joinedPath = new File(folder,  className + ".java").toString();
+            String joinedPath = new File(destFolder,  className + ".java").toString();
 
-            String classContent = getClassContent(table, className, modulename);
+            group.unload();
+            String classContent = getClassContent(table, group, className, modulename);
 
             File file = new File(joinedPath);
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
@@ -66,14 +68,13 @@ public class SchemaReaderTests {
         }
     }
 
-    @Test
-    public void generateNameOfClassTest() throws Exception {
+    public static void generateNameOfClass(String destFolder) throws Exception {
 
-        ClassLoader loader = this.getClass().getClassLoader();
+        ClassLoader loader = Generators.class.getClassLoader();
         URL templateUrl = loader.getResource("NameOfTemplate.stg");
         StringBuilder stringBuilder = new StringBuilder();
 
-        STGroupFile group = new STGroupFile(templateUrl.getPath());
+        STGroupFile group = getTemplateGroupFile(templateUrl.getPath());
 
         // Class comment start
         ST template = group.getInstanceOf("templateComment");
@@ -129,8 +130,7 @@ public class SchemaReaderTests {
         template = group.getInstanceOf("classEnd");
         stringBuilder.append(template.render());
 
-        String folder = "C:\\Logs\\Util";
-        String joinedPath = new File(folder,  "NameOf.java").toString();
+        String joinedPath = new File(destFolder,  "NameOf.java").toString();
 
         File file = new File(joinedPath);
         FileWriter fw = new FileWriter(file.getAbsoluteFile());
@@ -139,14 +139,13 @@ public class SchemaReaderTests {
         bw.close();
     }
 
-    @Test
-    public void generateModuleMapperTest() throws Exception {
+    public static void generateModuleMapper(String destFolder) throws Exception {
 
-        ClassLoader loader = this.getClass().getClassLoader();
+        ClassLoader loader = Generators.class.getClassLoader();
         URL templateUrl = loader.getResource("ModuleMapperTemplate.stg");
         StringBuilder stringBuilder = new StringBuilder();
 
-        STGroupFile group = new STGroupFile(templateUrl.getPath());
+        STGroupFile group = getTemplateGroupFile(templateUrl.getPath());
 
         // Class comment start
         ST template = group.getInstanceOf("packageAndImport");
@@ -181,8 +180,7 @@ public class SchemaReaderTests {
         template = group.getInstanceOf("classEnd");
         stringBuilder.append(template.render());
 
-        String folder = "C:\\Logs\\Util";
-        String joinedPath = new File(folder,  "ModuleMapper.java").toString();
+        String joinedPath = new File(destFolder,  "ModuleMapper.java").toString();
 
         File file = new File(joinedPath);
         FileWriter fw = new FileWriter(file.getAbsoluteFile());
@@ -191,55 +189,8 @@ public class SchemaReaderTests {
         bw.close();
     }
 
-    @Test
-    public void readSchemaTest()  {
 
-        try
-        {
-            Account account = new Account();
-            account.setUsername("root");
-            account.setPassword("pass4word01");
-
-            SchemaReader schemaReader = new SchemaReader();
-            List<Table> tableList = schemaReader.getSchemaTables(account);
-            System.out.println(tableList.size());
-            System.out.println(tableList);
-
-            List<String> uniqueProperties = new ArrayList<String>();
-            for (Table table : tableList) {
-                for (String item : table.getExtraPackages()) {
-                    if (!uniqueProperties.contains(item)) {
-                        uniqueProperties.add(item);
-                    }
-                }
-            }
-
-            System.out.println("Unique type");
-            for (String item : uniqueProperties) {
-                System.out.println(item);
-            }
-
-            System.out.println("");
-
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-
-    public Map<String, String> readAllModules()  {
-        Account account = new Account();
-        account.setUsername("root");
-        account.setPassword("pass4word01");
-
-        SchemaReader schemaReader = new SchemaReader();
-        Map<String, String> tableModuleMap = schemaReader.getAllModules(account);
-
-        System.out.println("Module count:::::::: " + tableModuleMap.size());
-        return tableModuleMap;
-    }
-
-    private List<Table> getTables() {
+    private static List<Table> getTables() {
 
         Account account = new Account();
         account.setUsername("root");
@@ -249,13 +200,8 @@ public class SchemaReaderTests {
         return schemaReader.getSchemaTables(account);
     }
 
-    private String getClassContent(Table table, String className, String modulename) throws Exception {
-
-        ClassLoader loader = this.getClass().getClassLoader();
-        URL templateUrl = loader.getResource("ModuleTemplate.stg");
+    private static String getClassContent(Table table, STGroupFile group, String className, String modulename) throws MalformedURLException {
         StringBuilder stringBuilder = new StringBuilder();
-
-        STGroupFile group = new STGroupFile(templateUrl.getPath());
 
         // Class comment start
         ST template = group.getInstanceOf("templateComment");
@@ -294,7 +240,6 @@ public class SchemaReaderTests {
         stringBuilder.append(template.render());
         stringBuilder.append(Utils.NewLine);
 
-
         // Set properties
         for (Column column : table.getColumns()) {
             template = group.getInstanceOf("property");
@@ -306,7 +251,6 @@ public class SchemaReaderTests {
         }
 
         stringBuilder.append(Utils.NewLine);
-
 
         // Set backing field properties
         StringBuilder backingFieldsBuilder = new StringBuilder();
@@ -326,8 +270,6 @@ public class SchemaReaderTests {
             backingFieldsBuilder.append(Utils.NewLine);
         }
 
-
-
         stringBuilder.append(backingFieldsBuilder.toString());
         backingFieldsBuilder.append(Utils.NewLine);
 
@@ -339,27 +281,33 @@ public class SchemaReaderTests {
         return stringBuilder.toString();
     }
 
-    private String getFormattedBackingFieldProperties(List<Column> columns)
-    {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Column column : columns) {
-            String property = column.getPropertyName();
-            String backingFieldName = Character.toLowerCase(property.charAt(0)) + property.substring(1);
-            stringBuilder.append(String.format("private %s %s;", column.getPropertyType(), backingFieldName));
-            stringBuilder.append(Utils.NewLine);
-        }
+    private static Map<String, String> readAllModules()  {
+        Account account = new Account();
+        account.setUsername("root");
+        account.setPassword("pass4word01");
 
-        return stringBuilder.toString();
+        SchemaReader schemaReader = new SchemaReader();
+        Map<String, String> tableModuleMap = schemaReader.getAllModules(account);
+
+        return tableModuleMap;
     }
 
-    private String getFormattedProperties(List<Column> columns)
-    {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Column column : columns) {
-            stringBuilder.append(column.getBackingFieldName());
-            stringBuilder.append(Utils.NewLine);
+    private static STGroupFile getTemplateGroupFile(String templatePath) throws MalformedURLException {
+
+        if (templatePath == null) {
+             return null;
         }
 
-        return stringBuilder.toString();
+        if (!templatePath.contains(".jar!")) {
+            return new STGroupFile(templatePath);
+        }
+
+        String protocol = "jar:";
+        if (templatePath.startsWith(protocol)) {
+            protocol = "";
+        }
+
+        URL url = new URL(protocol + templatePath);
+        return  new STGroupFile(url, "US-ASCII", '%', '%');
     }
 }

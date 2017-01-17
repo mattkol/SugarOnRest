@@ -1,3 +1,27 @@
+/**
+ MIT License
+
+ Copyright (c) 2017 Kola Oyewumi
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
+
 package com.sugaronrest.restapicalls;
 
 import com.fasterxml.jackson.databind.JavaType;
@@ -15,15 +39,11 @@ import org.apache.http.HttpStatus;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-/**
- * Created by kolao_000 on 2016-12-24.
- */
 public class SugarRestClientExt {
 
     /**
-     * Gets all entities limited by MaxResultCount sets in request options.
+     * Gets entity by id.
      *
      *  @param request The request object.
      *  @param moduleInfo The entity model info.
@@ -102,7 +122,7 @@ public class SugarRestClientExt {
             String moduleName = moduleInfo.name;
             Options options = request.getOptions();
 
-            String query = ModuleInfoExt.GetQuery(moduleInfo, options.getQueryPredicates(), options.getQuery());
+            String query = ModuleInfoExt.getQuery(moduleInfo, options.getQueryPredicates(), options.getQuery());
             ReadEntryListResponse response = GetEntryList.run(url, sessionId, moduleName, options.getSelectFields(), query, options.getMaxResult());
 
             if (response != null) {
@@ -144,7 +164,7 @@ public class SugarRestClientExt {
     }
 
     /**
-     * Gets all entities limited by MaxResultCount sets in request options.
+     * Gets all entities by page. Page options set in request options.
      *
      *  @param request The request object.
      *  @param moduleInfo The entity model info.
@@ -155,8 +175,7 @@ public class SugarRestClientExt {
         LoginResponse loginResponse = new LoginResponse();
         ObjectMapper mapper = JsonObjectMapper.getMapper();
 
-        try
-        {
+        try {
             LoginRequest loginRequest = new LoginRequest(request.getUrl(), request.getUsername(), request.getPassword());
             loginResponse = Authentication.login(loginRequest);
 
@@ -165,7 +184,7 @@ public class SugarRestClientExt {
             String moduleName = moduleInfo.name;
             Options options = request.getOptions();
 
-            String query = ModuleInfoExt.GetQuery(moduleInfo, options.getQueryPredicates(), options.getQuery());
+            String query = ModuleInfoExt.getQuery(moduleInfo, options.getQueryPredicates(), options.getQuery());
 
             ReadEntryListResponse response = GetPagedEntryList.run(url, sessionId, moduleName, options.getSelectFields(), query, options.getCurrentPage(), options.getNumberPerPage());
 
@@ -208,7 +227,7 @@ public class SugarRestClientExt {
     }
 
     /**
-     * Gets all entities limited by MaxResultCount sets in request options.
+     * Insert entity.
      *
      *  @param request The request object.
      *  @param moduleInfo The entity model info.
@@ -259,7 +278,7 @@ public class SugarRestClientExt {
     }
 
     /**
-     * Gets all entities limited by MaxResultCount sets in request options.
+     * Insert entities.
      *
      *  @param request The request object.
      *  @param moduleInfo The entity model info.
@@ -310,7 +329,7 @@ public class SugarRestClientExt {
     }
 
     /**
-     * Gets all entities limited by MaxResultCount sets in request options.
+     * Update entity.
      *
      *  @param request The request object.
      *  @param moduleInfo The entity model info.
@@ -361,7 +380,7 @@ public class SugarRestClientExt {
     }
 
     /**
-     * Gets all entities limited by MaxResultCount sets in request options.
+     * Update entities.
      *
      *  @param request The request object.
      *  @param moduleInfo The entity model info.
@@ -412,7 +431,7 @@ public class SugarRestClientExt {
     }
 
     /**
-     * Gets all entities limited by MaxResultCount sets in request options.
+     * Delete entity.
      *
      *  @param request The request object.
      *  @param moduleInfo The entity model info.
@@ -462,7 +481,7 @@ public class SugarRestClientExt {
     }
 
     /**
-     * Gets all entities limited by MaxResultCount sets in request options.
+     * Gets entity by id - returned data with linked modules data.
      *
      *  @param request The request object.
      *  @param moduleInfo The entity model info.
@@ -516,7 +535,7 @@ public class SugarRestClientExt {
     }
 
     /**
-     * Gets all entities limited by MaxResultCount sets in request options.
+     * Gets all linked entities limited by MaxResultCount sets in request options.
      *
      *  @param request The request object.
      *  @param moduleInfo The entity model info.
@@ -536,7 +555,7 @@ public class SugarRestClientExt {
             String moduleName = moduleInfo.name;
             Options options = request.getOptions();
             List<Object> linkedSelectFields = ModuleInfoExt.getJsonLinkedInfo(options.getLinkedModules());
-            String query = ModuleInfoExt.GetQuery(moduleInfo, options.getQueryPredicates(), options.getQuery());
+            String query = ModuleInfoExt.getQuery(moduleInfo, options.getQueryPredicates(), options.getQuery());
 
             ReadLinkedEntryListResponse response = GetLinkedEntryList.run(url, sessionId, moduleName, options.getSelectFields(), linkedSelectFields, query, options.getMaxResult());
 
@@ -571,7 +590,7 @@ public class SugarRestClientExt {
     }
 
     /**
-     * Gets all entities limited by MaxResultCount sets in request options.
+     * Gets available modules.
      *
      *  @param request The request object.
      *  @param moduleInfo The entity model info.
@@ -582,12 +601,11 @@ public class SugarRestClientExt {
         LoginResponse loginResponse = new LoginResponse();
         ObjectMapper mapper = JsonObjectMapper.getMapper();
 
-        try
-        {
+        try {
             LoginRequest loginRequest = new LoginRequest(request.getUrl(), request.getUsername(), request.getPassword());
             loginResponse = Authentication.login(loginRequest);
 
-            ReadAvailableModulesResponse response = GetAvailableModules.run(request.getUrl(), loginResponse.sessionId, request.getModuleName());
+            ReadAvailableModulesResponse response = GetAvailableModules.run(request.getUrl(), loginResponse.sessionId);
             if (response != null)
             {
                 sugarRestResponse.setJsonRawRequest(response.getJsonRawRequest());
@@ -611,13 +629,11 @@ public class SugarRestClientExt {
 
             return sugarRestResponse;
         }
-        catch (Exception exception)
-        {
+        catch (Exception exception) {
             sugarRestResponse.setStatusCode(HttpStatus.SC_INTERNAL_SERVER_ERROR);
             sugarRestResponse.setError(ErrorResponse.format(exception, StringUtils.EMPTY));
         }
-        finally
-        {
+        finally {
             Authentication.logout(request.getUrl(), loginResponse.sessionId);
         }
         return sugarRestResponse;

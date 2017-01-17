@@ -1,26 +1,15 @@
 package com.sugaronrest.tests;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sugaronrest.*;
 import com.sugaronrest.modules.Contacts;
-import com.sugaronrest.tests.helpers.AccountsModule;
 import com.sugaronrest.tests.helpers.ContactsModule;
-import com.sugaronrest.utils.JsonObjectMapper;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;
 import org.junit.Test;
-
-import java.io.IOException;
 import java.util.*;
-
-import static com.sugaronrest.QueryOperator.Contains;
-import static com.sugaronrest.QueryOperator.Equal;
 import static org.junit.Assert.*;
 
-/**
- * Created by kolao_000 on 2017-01-13.
- */
+
 public class ContactsModuleTests {
 
     @Test

@@ -11,12 +11,13 @@
  * @version 1.0.0
  * @since   2017-01-03
  *
- * A class which represents the the mapping of SugarCrm table to SugarCrm module name.
+ * A class which represents the the mapping of SugarCRM table to SugarCRM module name.
  */
 
 package com.sugaronrest.utils;
 
 import org.apache.commons.lang.StringUtils;
+
 import java.util.*;
 
 public class ModuleMapper {
@@ -24,9 +25,10 @@ public class ModuleMapper {
     private static ModuleMapper singleton = new ModuleMapper( );
     private static Map<String, String> mapper;
 
-    // A private Constructor prevents any other
-    //* class from instantiating.
-    //
+    /**
+     * Initializes a new instance of the Singleton JsonObjectMapper class.
+     * A private Constructor prevents any other class from instantiating it.
+     */
     private ModuleMapper() {
         mapper = new HashMap<String, String>();
         mapper.put("accounts", "Accounts");
@@ -69,11 +71,20 @@ public class ModuleMapper {
         mapper.put("users", "Users");
     }
 
-    /* Static 'instance' method */
-    public static ModuleMapper getInstance( ) {
+    /**
+     * Gets the static 'instance' of ModuleMapper.
+     * @return ModuleMapper object
+     */
+    public static ModuleMapper getInstance() {
         return singleton;
     }
 
+    /**
+     * Gets the module name based on tablename.
+     *
+     * @param tableName The SugarCRM module table name.
+     * @return SugarCRM module name.
+     */
     public static String getModule(String tableName)
     {
         if (mapper.containsKey(tableName)) {
@@ -83,6 +94,30 @@ public class ModuleMapper {
         return StringUtils.EMPTY;
     }
 
+    /**
+     * Gets the table name based on module name.
+     *
+     * @param moduleName Module name.
+     * @return SugarCRM module table name.
+     */
+    public static String getTablename(String moduleName)
+    {
+        if (mapper.containsValue(moduleName)) {
+            for (Map.Entry<String, String> entry: mapper.entrySet()) {
+                if (entry.getValue().equalsIgnoreCase(moduleName)) {
+                    return entry.getKey();
+                }
+            }
+        }
+
+        return StringUtils.EMPTY;
+    }
+
+    /**
+     * Gets the module names from mapper.
+     *
+     * @return List of module names.
+     */
     public static List<String> getAllModules()
     {
         List<String> list = new ArrayList<String>();

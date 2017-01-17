@@ -8,10 +8,7 @@ import org.apache.http.HttpStatus;
 import org.junit.Test;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import static com.sugaronrest.QueryOperator.*;
@@ -19,9 +16,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by kolao_000 on 2017-01-07.
- */
+
 public class QueryTests {
 
     @Test

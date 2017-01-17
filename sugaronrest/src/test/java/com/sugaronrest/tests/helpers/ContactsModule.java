@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by kolao_000 on 2017-01-13.
- */
 public class ContactsModule {
     public static SugarRestResponse createContact(SugarRestClient client, Contacts contact) {
         SugarRestRequest request = new SugarRestRequest("Contacts", RequestType.Create);

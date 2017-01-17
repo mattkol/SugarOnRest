@@ -1,3 +1,27 @@
+/**
+ MIT License
+
+ Copyright (c) 2017 Kola Oyewumi
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
+
 package com.sugaronrest.restapicalls.methodcalls;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -5,26 +29,24 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.sugaronrest.ErrorResponse;
 import com.sugaronrest.restapicalls.responses.InsertEntriesResponse;
-import com.sugaronrest.restapicalls.responses.InsertEntryResponse;
 import com.sugaronrest.utils.JsonObjectMapper;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;
 
 import java.util.*;
 
-/**
- * Created by kolao_000 on 2016-12-22.
- */
+
 public class InsertEntries {
+
     /**
-     * Creates entries [SugarCrm REST method - set_entries]
+     * Creates entries [SugarCRM REST method - set_entries].
      *
-     *  @param url REST API Url
-     *  @param sessionId Session identifier
-     *  @param moduleName SugarCrm module name
-     *  @param entities The entity objects collection to create
-     *  @param selectFields Selected field list
-     *  @return InsertEntriesResponse object
+     *  @param url REST API Url.
+     *  @param sessionId Session identifier.
+     *  @param moduleName SugarCRM module name.
+     *  @param entities The entity objects collection to create.
+     *  @param selectFields Selected field list.
+     *  @return InsertEntriesResponse object.
      */
     public static InsertEntriesResponse run(String url, String sessionId, String moduleName, List<Object> entities, List<String> selectFields)  {
 
@@ -102,6 +124,13 @@ public class InsertEntries {
         return insertEntriesResponse;
     }
 
+    /**
+     * Formats and return selected fields.
+     *
+     * @param entities List of Java objects to update.
+     * @param selectFields Selected fields.
+     * @return Formatted selected fields.
+     */
     private static List<Map<String, Object>> EntitiesToNameValueList(List<Object> entities, List<String> selectFields) {
         if (entities == null) {
             return null;

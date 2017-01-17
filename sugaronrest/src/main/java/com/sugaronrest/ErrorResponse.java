@@ -1,3 +1,27 @@
+/**
+  MIT License
+
+ Copyright (c) 2017 Kola Oyewumi
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
+
 package com.sugaronrest;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,81 +36,78 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-/**
- * Created by kolao_000 on 2016-12-22.
- */
+
 @JsonRootName(value = "error_response")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ErrorResponse {
+
     /**
      * Gets or sets the http status code
      */
     public int getStatusCode() {
         return statusCode;
     }
-
     public void setStatusCode(int value) {
         statusCode = value;
     }
 
     /**
-     * Gets or sets the name of the returned error type
+     * Gets or sets error title.
      */
-
     public String getName() {
         return name;
     }
-
     public void setName(String value) {
         name = value;
     }
 
     /**
-     * Gets or sets the number of the error returned
+     * Gets or sets the error number returned from SugarCRM.
      */
     public int getNumber() {
         return number;
     }
-
     public void setNumber(int value) {
         number = value;
     }
 
     /**
-     * Gets or sets the error message description
+     * Gets or sets the error message description returned from SugarCRM.
      */
     public String getMessage() {
         return message;
     }
-
     public void setMessage(String value) {
         message = value;
     }
 
     /**
-     * Gets or sets the error message description
+     * Gets or sets exception type.
+     */
+    public String getExceptionType() {
+        return exceptionType;
+    }
+    public void setExceptionType(String value) {
+        exceptionType = value;
+    }
+
+    /**
+     * Gets the error stack trace description.
      */
     public String getTrace() {
         return stackTrace;
     }
 
-    public void setTrace(String value) {
-        stackTrace = value;
-    }
-
+    /**
+     * Sets the error trace based on exception object.
+     *
+     * @param exception The exception object.
+     */
     public void setTrace(Exception exception) {
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);
         exception.printStackTrace(printWriter);
         stackTrace = stringWriter.toString();
-    }
-
-    public String getExceptionType() {
-        return exceptionType;
-    }
-
-    public void setExceptionType(String value) {
-        exceptionType = value;
     }
 
     /**
@@ -103,11 +124,14 @@ public class ErrorResponse {
                 if (errorResponse.getNumber() <= 0) {
                     return null;
                 }
+
+                errorResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
             }
 
-            errorResponse.setStatusCode(HttpStatus.SC_BAD_REQUEST);
             return errorResponse;
         } catch (IOException e) {
+            return null;
+        } catch (Exception e) {
             return null;
         }
     }
@@ -133,10 +157,10 @@ public class ErrorResponse {
     }
 
     /**
-     * Gets formatted error response exception or SugarCrm error message
+     * Gets formatted error response exception or SugarCRM error message
      *
-     * @param exception    Exception from SugarCrm REST API calls or .NET error
-     * @param errorContent Error returned from SugarCrm
+     * @param exception    Exception from SugarCRM REST API calls or .NET error
+     * @param errorContent Error returned from SugarCRM
      * @return ErrorResponse object
      */
     public static ErrorResponse format(Exception exception, String errorContent)  {
@@ -156,9 +180,9 @@ public class ErrorResponse {
     }
 
     /**
-     * Gets formatted SugarCrm error message
+     * Gets formatted SugarCRM error message
      *
-     * @param errorContent Error returned from SugarCrm
+     * @param errorContent Error returned from SugarCRM
      * @return ErrorResponse object
      */
     public static ErrorResponse format(String errorContent) {

@@ -1,6 +1,28 @@
-package com.sugarcrm.pojogen;
+/**
+ MIT License
 
-import com.mysql.jdbc.StringUtils;
+ Copyright (c) 2017 Kola Oyewumi
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
+
+package com.sugarcrm.pojogen;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -9,21 +31,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by kolao_000 on 2016-12-29.
- */
+
 public class SchemaReader {
 
+    /**
+     * Gets the table info of the schema.
+     *
+     * @param account The credential object.
+     * @return Table object collection.
+     */
     public List<Table> getSchemaTables(Account account)  {
         List<Table> tables = new ArrayList<Table>();
+        SqlQueryData queryData =  new SqlQueryData();
 
         try
         {
-            ResultSet resultSet = DataAccess.getSchemaResultSet(account);
+            ResultSet resultSet = DataAccess.getSchemaResultSet(account, queryData);
             ResultSetMetaData metaData = resultSet.getMetaData();
             int columnCount = metaData.getColumnCount();
-            System.out.println(columnCount);
-            System.out.println("");
 
             while (resultSet.next()) {
                 String schema = resultSet.getString("TABLE_SCHEMA");
@@ -55,29 +80,35 @@ public class SchemaReader {
 
                 table.setExtraPackages(uniquePackages);
                 tables.add(table);
-
-                System.out.println(schema + ":" + tableName + ":" + className + ":" + isView);
-                System.out.println("");
             }
 
         } catch (Exception e){
+            queryData.closeResources();
             e.printStackTrace();
         }
 
+        queryData.closeResources();
         return tables;
     }
 
+    /**
+     * Gets table columns.
+     *
+     * @param account The credential object.
+     * @param schema The schema name.
+     * @param tablename The table name.
+     * @return Columns collection.
+     */
     public List<Column> getTableColumns(Account account, String schema, String tablename)  {
 
         List<Column> columns = new ArrayList<Column>();
+        SqlQueryData queryData =  new SqlQueryData();
 
         try
         {
-            ResultSet resultSet = DataAccess.getTableResultSet(account, schema, tablename);
+            ResultSet resultSet = DataAccess.getTableResultSet(account, queryData, schema, tablename);
             ResultSetMetaData metaData = resultSet.getMetaData();
             int columnCount = metaData.getColumnCount();
-            System.out.println(columnCount);
-            System.out.println("");
 
             while (resultSet.next()) {
                 // SELECT COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH, COLUMN_KEY, IS_NULLABLE, EXTRA
@@ -104,28 +135,32 @@ public class SchemaReader {
                 column.setIsPk(isVPrimaryKey);
 
                 columns.add(column);
-
-                System.out.println(name + ":"  + propertyName + ":" + dataType + ":" + propertyType + " Nullable :" + isNullable + " Pri :" + isVPrimaryKey + " Extra: " + extra);
-                System.out.println("");
             }
 
         } catch (Exception e){
+            queryData.closeResources();
             e.printStackTrace();
         }
 
+        queryData.closeResources();
         return columns;
     }
 
+    /**
+     * Gets all module mapping.
+     *
+     * @param account The credential object.
+     * @return Mapping of table names and SugarCRM modules.
+     */
     public Map<String, String> getAllModules(Account account) {
         Map<String, String> tableModuleMap = new HashMap<String, String>();
+        SqlQueryData queryData =  new SqlQueryData();
 
         try
         {
-            ResultSet resultSet = DataAccess.getRelationshipResultSet(account);
+            ResultSet resultSet = DataAccess.getRelationshipResultSet(account, queryData);
             ResultSetMetaData metaData = resultSet.getMetaData();
             int columnCount = metaData.getColumnCount();
-            System.out.println(columnCount);
-            System.out.println("");
 
             while (resultSet.next()) {
                 // LHS_MODULE, LHS_TABLE, RHS_MODULE, RHS_TABLE
@@ -144,9 +179,11 @@ public class SchemaReader {
             }
 
         } catch (Exception e){
+            queryData.closeResources();
             e.printStackTrace();
         }
 
+        queryData.closeResources();
         return tableModuleMap;
     }
 }

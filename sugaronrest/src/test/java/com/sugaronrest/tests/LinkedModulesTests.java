@@ -7,6 +7,7 @@ import com.sugaronrest.modules.Accounts;
 import com.sugaronrest.modules.Contacts;
 import com.sugaronrest.tests.custommodels.CustomAcccount1;
 import com.sugaronrest.tests.custommodels.CustomAcccount2;
+import com.sugaronrest.tests.custommodels.CustomAcccount3;
 import com.sugaronrest.tests.helpers.AccountsModule;
 import com.sugaronrest.tests.helpers.LinkedModules;
 import com.sugaronrest.utils.JsonObjectMapper;
@@ -22,9 +23,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by kolao_000 on 2017-01-08.
- */
+
 public class LinkedModulesTests {
 
     @Test
@@ -99,6 +98,32 @@ public class LinkedModulesTests {
         assertEquals(accountId, customAccount.getId());
 
         // -------------------End Read Account Link Concat-------------------
+
+        System.out.println(response.getJsonRawRequest());
+    }
+
+    @Test
+    public void linkedRead3Test() throws IOException {
+        SugarRestClient client = new SugarRestClient(TestAccount.Url, TestAccount.Username, TestAccount.Password);
+
+        // -------------------Bulk Read Account-------------------
+        int count = 10;
+
+        // -------------------Read Account Link Concat-------------------
+        SugarRestResponse response = LinkedModules.readAccountLinkItems2(client, count);
+
+        assertNotNull(response);
+        assertEquals(response.getStatusCode(), HttpStatus.SC_OK);
+
+        String jsonData = response.getJData();
+        assertNotNull(jsonData);
+        assertNotSame(jsonData, StringUtils.EMPTY );
+
+
+        // -------------------End Read Account Link Concat-------------------
+
+        System.out.println(response.getJsonRawRequest());
+        System.out.println(response.getJsonRawResponse());
     }
 
     @Test
@@ -124,36 +149,56 @@ public class LinkedModulesTests {
         assertEquals(customAccounts.size(), count);
     }
 
-    public static SugarRestResponse bulkReadAccountLinkItems2(SugarRestClient client, int count) {
-        SugarRestRequest request = new SugarRestRequest("Accounts", RequestType.LinkedBulkRead);
-        request.getOptions().setMaxResult(count);
+    @Test
+    public void bulkLinkedRead2Test() throws IOException {
+        SugarRestClient client = new SugarRestClient(TestAccount.Url, TestAccount.Username, TestAccount.Password);
 
-        List<String> selectedFields = new ArrayList<String>();
+        // -------------------Read Account Link Items-------------------
+        int count = 10;
+        SugarRestResponse response = LinkedModules.bulkReadAccountLinkItems(client, count);
 
-        selectedFields.add("id");
-        selectedFields.add("name");
-        selectedFields.add("industry");
-        selectedFields.add("website");
+        assertNotNull(response);
+        assertEquals(response.getStatusCode(), HttpStatus.SC_OK);
 
-        request.getOptions().setSelectFields(selectedFields);
+        String jsonData = response.getJData();
+        assertNull(response.getData());
+        assertNotNull(jsonData);
 
-        Map<Object, List<String>> linkedListInfo = new HashMap<Object, List<String>>();
+        // Deserialize json data to custom object
+        ObjectMapper mapper = JsonObjectMapper.getMapper();
+        JavaType type = mapper.getTypeFactory().constructCollectionType(ArrayList.class, CustomAcccount2.class) ;
+        List<CustomAcccount2> customAccounts = mapper.readValue(jsonData, type);
+        assertNotNull(customAccounts);
+        assertEquals(customAccounts.size(), count);
 
-        List<String> selectContactFields = new ArrayList<String>();
-        selectContactFields.add(NameOf.Contacts.FirstName);
-        selectContactFields.add(NameOf.Contacts.LastName);
-        selectContactFields.add(NameOf.Contacts.Title);
-        selectContactFields.add(NameOf.Contacts.Description);
-        selectContactFields.add(NameOf.Contacts.PrimaryAddressPostalcode);
+        // -------------------End Account Link Items-------------------
+    }
 
-        linkedListInfo.put(Contacts.class, selectContactFields);
+    @Test
+    public void bulkLinkedRead3Test() throws IOException {
+        SugarRestClient client = new SugarRestClient(TestAccount.Url, TestAccount.Username, TestAccount.Password);
 
-        // Get all fields for Bug
-        linkedListInfo.put("Bugs", null);
+        // -------------------Read Account Link Items-------------------
+        int count = 10;
+        SugarRestResponse response = LinkedModules.bulkReadAccountLinkItems2(client, count);
 
-        request.getOptions().setLinkedModules(linkedListInfo);
+        assertNotNull(response);
+        assertEquals(response.getStatusCode(), HttpStatus.SC_OK);
 
-        return client.execute(request);
+        String jsonData = response.getJData();
+        assertNull(response.getData());
+        assertNotNull(jsonData);
+
+        System.out.println(response.getJsonRawRequest());
+        System.out.println(response.getJsonRawResponse());
+
+        // Deserialize json data to custom object
+        ObjectMapper mapper = JsonObjectMapper.getMapper();
+        JavaType type = mapper.getTypeFactory().constructCollectionType(ArrayList.class, CustomAcccount3.class) ;
+        List<CustomAcccount3> customAccounts = mapper.readValue(jsonData, type);
+        assertNotNull(customAccounts);
+        assertEquals(customAccounts.size(), count);
+        // -------------------End Account Link Items-------------------
     }
 }
 

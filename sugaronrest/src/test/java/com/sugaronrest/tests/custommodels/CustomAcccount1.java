@@ -7,9 +7,7 @@ import com.sugaronrest.modules.Contacts;
 
 import java.util.List;
 
-/**
- * Created by kolao_000 on 2017-01-08.
- */
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CustomAcccount1  extends Accounts {
 

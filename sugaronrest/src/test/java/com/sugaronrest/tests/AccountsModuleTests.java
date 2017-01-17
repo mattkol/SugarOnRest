@@ -14,12 +14,9 @@ import java.io.IOException;
 import java.util.*;
 
 import static com.sugaronrest.QueryOperator.Contains;
-import static com.sugaronrest.QueryOperator.Equal;
 import static org.junit.Assert.*;
 
-/**
- * Created by kolao_000 on 2017-01-05.
- */
+
 public class AccountsModuleTests {
 
     @Test

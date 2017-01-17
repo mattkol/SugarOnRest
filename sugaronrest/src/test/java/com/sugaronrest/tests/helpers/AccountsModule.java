@@ -3,14 +3,10 @@ package com.sugaronrest.tests.helpers;
 import com.sugaronrest.*;
 import com.sugaronrest.modules.Accounts;
 import org.apache.commons.lang.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by kolao_000 on 2017-01-08.
- */
 public class AccountsModule {
 
     public static SugarRestResponse createAccount(SugarRestClient client, Accounts account) {

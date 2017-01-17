@@ -1,3 +1,27 @@
+/**
+ MIT License
+
+ Copyright (c) 2017 Kola Oyewumi
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
+
 package com.sugaronrest.restapicalls.methodcalls;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,16 +38,19 @@ import java.util.List;
 import java.util.Map;
 
 
-/**
- * Created by kolao_000 on 2016-12-22.
- */
 public class GetEntryList {
 
     /**
-     * Login to SugarCrm via REST API call
+     * Gets entries [SugarCRM REST method - get_entry_list].
      *
-     *  @param sessionId LoginRequest object
-     *  @return LoginResponse object
+     * @param url REST API Url.
+     * @param sessionId Session identifier.
+     * @param moduleName SugarCRM module name.
+     * @param selectFields Selected field list.
+     * @param queryString Formatted query string.
+     * @param maxCountResult Maximum number of entries to return.
+     * @return ReadEntryListResponse object.
+     * @throws Exception
      */
     public static ReadEntryListResponse run(String url, String sessionId, String moduleName, List<String> selectFields, String queryString, int maxCountResult) throws Exception {
 

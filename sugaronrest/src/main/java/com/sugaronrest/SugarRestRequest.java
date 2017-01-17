@@ -1,3 +1,27 @@
+/**
+ MIT License
+
+ Copyright (c) 2017 Kola Oyewumi
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
+
 package com.sugaronrest;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -8,9 +32,7 @@ import org.apache.commons.lang.StringUtils;
 import java.io.IOException;
 import java.lang.reflect.Type;
 
-/**
- * Represents SugarRestRequest class
- */
+
 public class SugarRestRequest {
 
     /**
@@ -24,7 +46,7 @@ public class SugarRestRequest {
     /**
      * Initializes a new instance of the SugarRestRequest class.
      *
-     *  @param moduleName The SugarCrm module name.
+     *  @param moduleName The SugarCRM module name.
      */
     public SugarRestRequest(String moduleName) throws Exception {
         this.setModuleName(moduleName);
@@ -35,7 +57,7 @@ public class SugarRestRequest {
     /**
      * Initializes a new instance of the SugarRestRequest class.
      *
-     *  @param moduleType The SugarCrm module Java type.
+     *  @param moduleType The SugarCRM module Java type.
      */
     public SugarRestRequest(Type moduleType) {
         this.setModuleType(moduleType);
@@ -57,7 +79,7 @@ public class SugarRestRequest {
     /**
      * Initializes a new instance of the SugarRestRequest class.
      *
-     *  @param moduleName The SugarCrm module name.
+     *  @param moduleName The SugarCRM module name.
      *  @param requestType The request type.
      */
     public SugarRestRequest(String moduleName, RequestType requestType) {
@@ -70,7 +92,7 @@ public class SugarRestRequest {
     /**
      * Initializes a new instance of the SugarRestRequest class.
      *
-     *  @param moduleType The SugarCrm module name.
+     *  @param moduleType The SugarCRM module name.
      *  @param requestType The request type.
      */
     public SugarRestRequest(Type moduleType, RequestType requestType) {
@@ -80,14 +102,12 @@ public class SugarRestRequest {
         this.validationMessage = StringUtils.EMPTY;
     }
 
-
     /**
-     * Gets or sets SugarCrm REST API Url.
+     * Gets or sets SugarCRM REST API Url.
      */
     public String getUrl() {
         return url;
     }
-
     public void setUrl(String value) {
         url = value;
     }
@@ -98,7 +118,6 @@ public class SugarRestRequest {
     public String getUsername() {
         return username;
     }
-
     public void setUsername(String value) {
         username = value;
     }
@@ -109,40 +128,36 @@ public class SugarRestRequest {
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String value) {
         password = value;
     }
 
     /**
-     * Gets or sets SugarCrm module name
+     * Gets or sets SugarCRM module name
      */
     public String getModuleName() {
         return moduleName;
     }
-
     public void setModuleName(String value) {
         moduleName = value;
     }
 
     /**
-     * Gets or sets SugarCrm module name
+     * Gets or sets SugarCRM module name
      */
     public Type getModuleType() {
         return moduleType;
     }
-
     public void setModuleType(Type value) {
         moduleType = value;
     }
 
     /**
-     * Gets or sets SugarCrm module name.
+     * Gets or sets SugarCRM module name.
      */
     public RequestType getRequestType() {
         return requestType;
     }
-
     public void setRequestType(RequestType value) {
         requestType = value;
     }
@@ -160,11 +175,11 @@ public class SugarRestRequest {
      * Delete - Identifier (Id)
      * LinkedReadById - Identifier (Id) (Linked option value must be set.)
      * LinkedBulkRead - null (Linked option value must be set.)
+     * AllModulesRead - null
      */
     public Object getParameter() {
         return parameter;
     }
-
     public void setParameter(Object value) {
         parameter = value;
     }
@@ -175,7 +190,6 @@ public class SugarRestRequest {
     public Options getOptions() {
         return options;
     }
-
     public void setOptions(Options value) {
         options = value;
     }
@@ -260,6 +274,13 @@ public class SugarRestRequest {
         return !StringUtils.isNotBlank(this.validationMessage);
     }
 
+    /**
+     * Validates module name or module type.
+     *
+     * @param builder Cummulative error builder reference.
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     @JsonIgnore
     private void validateModuleNameOrType(StringBuilder builder) throws IOException, ClassNotFoundException {
         if (getRequestType() == RequestType.AllModulesRead) {

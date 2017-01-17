@@ -9,9 +9,7 @@ import com.sugaronrest.modules.Leads;
 
 import java.util.List;
 
-/**
- * Created by kolao_000 on 2017-01-08.
- */
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CustomAcccount2  extends Accounts {
 

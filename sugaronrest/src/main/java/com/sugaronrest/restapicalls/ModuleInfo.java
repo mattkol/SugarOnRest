@@ -1,36 +1,51 @@
+/**
+ MIT License
+
+ Copyright (c) 2017 Kola Oyewumi
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
+
 package com.sugaronrest.restapicalls;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sugaronrest.utils.ModuleMapper;
-import com.sugaronrest.utils.Utils;
 import org.apache.commons.lang.StringUtils;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.Scanner;
 
-/**
- * This class represents ModuleInfo class.
- */
+
 public class ModuleInfo {
 
     final static String PackageName = "com.sugaronrest.modules";
     final static String PackagePath = "com/sugaronrest/modules";
 
     /**
-     * Gets or sets the SugarCrm module name.
+     * Gets or sets the SugarCRM module name.
      */
     public String name;
 
     /**
-     * Gets or sets the SugarCrm json module name.
+     * Gets or sets the SugarCRM json module name.
      * This maps to the tablename in module annotation.
      */
     public String jsonName;
@@ -43,9 +58,17 @@ public class ModuleInfo {
     /**
      * Gets or sets model properties.
      */
-    public List<ModelProperty> modelProperties;
+    public List<ModuleProperty> modelProperties;
 
-    public static ModuleInfo read(Type type, String moduleName) throws Exception {
+    /**
+     * Creates ModuleInfo object based or module type or SugarCRM module name.
+     * 
+     * @param type The Java Pojo module type (e.g Accounts.class).
+     * @param moduleName The SugarCRM module name.
+     * @return The created ModuleInfo object.
+     * @throws Exception
+     */
+    public static ModuleInfo create(Type type, String moduleName) throws Exception {
         ModuleInfo moduleInfo = null;
         if (type != null) {
             moduleInfo = readByType(type);
@@ -57,7 +80,13 @@ public class ModuleInfo {
         return moduleInfo;
     }
 
-    public static Class readClassFromName(String moduleName) {
+    /**
+     * Gets Java module class from SugarCRM module name.
+     *
+     * @param moduleName The SugarCRM module name.
+     * @return The Java class type.
+     */
+    public static Class getClassFromName(String moduleName) {
         try {
 
             ClassLoader classLoader = ModuleInfo.class.getClassLoader();
@@ -68,6 +97,11 @@ public class ModuleInfo {
         }
     }
 
+    /**
+     * Gets json property names of Java module.
+     *
+     * @return List of json property names.
+     */
     public List<String> getJsonPropertyNames() {
         List<String> jsonNames = new ArrayList<String>();
 
@@ -75,13 +109,19 @@ public class ModuleInfo {
             return jsonNames;
         }
 
-        for (ModelProperty property : modelProperties) {
+        for (ModuleProperty property : modelProperties) {
             jsonNames.add(property.jsonName);
         }
 
         return jsonNames;
     }
 
+    /**
+     *  Gets class name (module name) from Java class type.
+     *
+     * @param type The Java type.
+     * @return Class name.
+     */
     public static String getClassName(Type type) {
         if (type == null) {
             return StringUtils.EMPTY;
@@ -130,7 +170,7 @@ public class ModuleInfo {
         moduleInfo.jsonName = jsonModuleName;
         moduleInfo.type = moduleClass;
 
-        List<ModelProperty> modelProperties = getFieldAnnotations(moduleClass);
+        List<ModuleProperty> modelProperties = getFieldAnnotations(moduleClass);
         moduleInfo.modelProperties = modelProperties;
 
         return moduleInfo;
@@ -144,7 +184,7 @@ public class ModuleInfo {
      */
     private static ModuleInfo readByName(String moduleName) throws Exception {
         ModuleInfo moduleInfo = new ModuleInfo();
-        Class moduleClass = readClassFromName(moduleName);
+        Class moduleClass = getClassFromName(moduleName);
         String jsonModuleName = null;
 
         if (moduleClass ==null) {
@@ -169,14 +209,20 @@ public class ModuleInfo {
         moduleInfo.jsonName = jsonModuleName;
         moduleInfo.type = moduleClass;
 
-        List<ModelProperty> modelProperties = getFieldAnnotations(moduleClass);
+        List<ModuleProperty> modelProperties = getFieldAnnotations(moduleClass);
         moduleInfo.modelProperties = modelProperties;
 
         return moduleInfo;
     }
 
-    private static List<ModelProperty> getFieldAnnotations(Class type) {
-        List<ModelProperty> modelProperties = new ArrayList<ModelProperty>();
+    /**
+     * Gets json names from module fields annotations.
+     *
+     * @param type The Java module type.
+     * @return List of json property names.
+     */
+    private static List<ModuleProperty> getFieldAnnotations(Class type) {
+        List<ModuleProperty> modelProperties = new ArrayList<ModuleProperty>();
         Field[] fields = type.getDeclaredFields();
          for(Field field : fields) {
             Annotation[] annotations = field.getDeclaredAnnotations();
@@ -184,12 +230,12 @@ public class ModuleInfo {
             for(Annotation annotation : annotations){
                 if(annotation instanceof JsonProperty){
                     JsonProperty property = (JsonProperty) annotation;
-                    ModelProperty modelProperty = new ModelProperty();
-                    modelProperty.name = field.getName();
-                    modelProperty.jsonName = property.value();
-                    modelProperty.type = field.getType();
-                    modelProperty.isNumeric = isTypeNumeric(field.getType());
-                    modelProperties.add(modelProperty);
+                    ModuleProperty moduleProperty = new ModuleProperty();
+                    moduleProperty.name = field.getName();
+                    moduleProperty.jsonName = property.value();
+                    moduleProperty.type = field.getType();
+                    moduleProperty.isNumeric = isTypeNumeric(field.getType());
+                    modelProperties.add(moduleProperty);
                 }
             }
         }
@@ -197,6 +243,12 @@ public class ModuleInfo {
         return modelProperties;
     }
 
+    /**
+     * Gets class name.
+     *
+     * @param moduleName Module name.
+     * @return Class name.
+     */
     private static String getClassName(String moduleName) {
         if (!StringUtils.isNotBlank(moduleName)) {
             return StringUtils.EMPTY;
@@ -211,6 +263,12 @@ public class ModuleInfo {
         return moduleName;
     }
 
+    /**
+     *  Checks if field is numeric or not.
+     *
+     * @param type Field type.
+     * @return True or false.
+     */
     public static boolean isTypeNumeric(Class type) {
         if (type == null)
         {

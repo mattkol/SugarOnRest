@@ -8,20 +8,15 @@ import com.sugaronrest.utils.ModuleMapper;
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by kolao_000 on 2017-01-15.
- */
 public class AvailableModulesTests {
 
-    @Test
+    //@Test
     public void getAllModules() {
         SugarRestClient client = new SugarRestClient(TestAccount.Url, TestAccount.Username, TestAccount.Password);
         SugarRestRequest request = new SugarRestRequest(RequestType.AllModulesRead);
@@ -81,4 +76,5 @@ public class AvailableModulesTests {
         request.getOptions().setMaxResult(5);
         return client.execute(request);
     }
+
 }

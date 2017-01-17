@@ -1,3 +1,27 @@
+/**
+ MIT License
+
+ Copyright (c) 2017 Kola Oyewumi
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
+
 package com.sugarcrm.pojogen;
 
 import java.util.ArrayList;
@@ -8,30 +32,22 @@ import java.util.List;
  */
 public class Table
 {
-    private String schema = new String();
-    private String name = new String();
-    private String cleanName = new String();
-    private String className = new String();
-    private boolean isView = false;
-    private boolean ignore = false;
-    private List<Column> columns = new ArrayList<Column>();
-    private List<String> extraPackages = new ArrayList<String>();
-
     /**
      * Gets or sets list of columns.
      */
     public List<Column> getColumns() {
         return columns;
     }
-
     public void setColumns(List<Column> value) {
         columns = value;
     }
 
+    /**
+     * Gets or sets the extra packing info for the Java module class (created based on the table).
+     */
     public List<String> getExtraPackages() {
         return extraPackages;
     }
-
     public void setExtraPackages(List<String> value) {
         extraPackages = value;
     }
@@ -42,7 +58,6 @@ public class Table
     public String getName() {
         return name;
     }
-
     public void setName(String value) {
         name = value;
     }
@@ -53,7 +68,6 @@ public class Table
     public String getSchema() {
         return schema;
     }
-
     public void setSchema(String value) {
         schema = value;
     }
@@ -64,7 +78,6 @@ public class Table
     public boolean getIsView() {
         return isView;
     }
-
     public void setIsView(boolean value) {
         isView = value;
     }
@@ -75,7 +88,6 @@ public class Table
     public String getCleanName() {
         return cleanName;
     }
-
     public void setCleanName(String value) {
         cleanName = value;
     }
@@ -86,7 +98,6 @@ public class Table
     public String getClassName() {
         return className;
     }
-
     public void setClassName(String value) {
         className = value;
     }
@@ -97,7 +108,6 @@ public class Table
     public boolean getIgnore() {
         return ignore;
     }
-
     public void setIgnore(boolean value) {
         ignore = value;
     }
@@ -133,6 +143,15 @@ public class Table
 
         return null;
     }
+
+    private String schema;
+    private String name;
+    private String cleanName;
+    private String className;
+    private boolean isView;
+    private boolean ignore;
+    private List<Column> columns;
+    private List<String> extraPackages;
 }
 
 

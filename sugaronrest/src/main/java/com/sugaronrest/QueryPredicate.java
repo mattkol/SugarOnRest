@@ -1,9 +1,32 @@
+/**
+ MIT License
+
+ Copyright (c) 2017 Kola Oyewumi
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
+
 package com.sugaronrest;
 
-/**
- * Represents QueryPredicate class.
- */
+
 public class QueryPredicate {
+
     /**
      * Initializes a new instance of the QueryPredicate class.
      *
@@ -22,7 +45,7 @@ public class QueryPredicate {
     /**
      * Initializes a new instance of the QueryPredicate class.
      *
-     *  @param propertyName The property name. This can be a C# model property name or json property name.
+     *  @param propertyName The json property name.
      *  @param queryOperator The query operator.
      *  @param value The predicate value.
      *  @param fromValue The predicate from value.
@@ -42,7 +65,6 @@ public class QueryPredicate {
     public String getPropertyName() {
         return propertyName;
     }
-
     public void setPropertyName(String value) {
         propertyName = value;
     }
@@ -53,7 +75,6 @@ public class QueryPredicate {
     public QueryOperator getOperator() {
         return operator;
     }
-
     public void setOperator(QueryOperator value) {
         operator = value;
     }
@@ -64,7 +85,6 @@ public class QueryPredicate {
     public Object getValue() {
         return objValue;
     }
-
     public void setValue(Object value) {
         objValue = value;
     }
@@ -75,7 +95,6 @@ public class QueryPredicate {
     public Object getFromValue() {
         return fromValue;
     }
-
     public void setFromValue(Object value) {
         fromValue = value;
     }
@@ -86,7 +105,6 @@ public class QueryPredicate {
     public Object getToValue() {
         return toValue;
     }
-
     public void setToValue(Object value) {
         toValue = value;
     }

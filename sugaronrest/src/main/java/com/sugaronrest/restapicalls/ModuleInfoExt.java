@@ -1,16 +1,37 @@
+/**
+ MIT License
+
+ Copyright (c) 2017 Kola Oyewumi
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
+
 package com.sugaronrest.restapicalls;
 
 import com.sugaronrest.QueryPredicate;
+import com.sugaronrest.utils.ModuleMapper;
 import org.apache.commons.lang.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.*;
 
-import static org.junit.Assert.assertTrue;
 
-/**
- * Created by kolao_000 on 2017-01-07.
- */
 public class ModuleInfoExt {
 
     /**
@@ -46,20 +67,21 @@ public class ModuleInfoExt {
         return jsonLinkedInfoList;
     }
 
-    /// <summary>
-    /// Gets query based on either query predicates or raw query.
-    /// </summary>
-    /// <param name="modelInfo">SugarCrm module info.</param>
-    /// <param name="queryPredicates">The query predicate collection.</param>
-    /// <param name="queryString">Formatted query string.</param>
-    /// <returns>The formatted query.</returns>
-    public static String GetQuery(ModuleInfo moduleInfo, List<QueryPredicate> queryPredicates, String queryString) {
+    /**
+     * Gets query based on either query predicates or raw query.
+     *
+     * @param moduleInfo SugarCRM module info.
+     * @param queryPredicates The query predicate collection.
+     * @param queryString Formatted query string.
+     * @return The formatted query.
+     */
+    public static String getQuery(ModuleInfo moduleInfo, List<QueryPredicate> queryPredicates, String queryString) {
         if (StringUtils.isNotBlank(queryString))
         {
             return " " + queryString.trim() + " ";
         }
 
-        List<JsonPredicate> jsonPredicates = GetJsonPredicates(moduleInfo, queryPredicates);
+        List<JsonPredicate> jsonPredicates = getJsonPredicates(moduleInfo, queryPredicates);
 
         return QueryBuilder.getWhereClause(jsonPredicates);
     }
@@ -81,57 +103,69 @@ public class ModuleInfoExt {
             Object key = entry.getKey();
             List<String> jsonPropertyNames = entry.getValue();
             ModuleInfo linkedModuleInfo = null;
+            String jsonModuleName = StringUtils.EMPTY;
 
             if (key instanceof String) {
-                if ((jsonPropertyNames == null) || (jsonPropertyNames.size() == 0)) {
-                    linkedModuleInfo = ModuleInfo.read(null, key.toString());
-                    if (linkedModuleInfo == null) {
-                        jsonPropertyNames = linkedModuleInfo.getJsonPropertyNames();
-                    }
-                }
-                jsonLinkedInfo.put(key.toString(), jsonPropertyNames);
-            } else if (key instanceof Type) {
-                // This key is a class type (e.g Accounts.class)
-                linkedModuleInfo = ModuleInfo.read((Type)key, null);
+                linkedModuleInfo = ModuleInfo.create(null, key.toString());
                 if (linkedModuleInfo != null) {
                     if ((jsonPropertyNames == null) || (jsonPropertyNames.size() == 0)) {
                         jsonPropertyNames = linkedModuleInfo.getJsonPropertyNames();
                     }
-                    jsonLinkedInfo.put(linkedModuleInfo.jsonName, jsonPropertyNames);
+                    jsonModuleName = linkedModuleInfo.jsonName;
+                }
+                if (!StringUtils.isNotBlank(jsonModuleName)) {
+                    jsonModuleName = ModuleMapper.getInstance().getTablename(key.toString());
+                }
+
+            } else if (key instanceof Type) {
+                // This key is a class type (e.g Accounts.class)
+                linkedModuleInfo = ModuleInfo.create((Type)key, null);
+                if (linkedModuleInfo != null) {
+                    if ((jsonPropertyNames == null) || (jsonPropertyNames.size() == 0)) {
+                        jsonPropertyNames = linkedModuleInfo.getJsonPropertyNames();
+                    }
+                    jsonModuleName = linkedModuleInfo.jsonName;
+                }
+
+                if (!StringUtils.isNotBlank(jsonModuleName)) {
+                    String className = ModuleInfo.getClassName((Type)key);
+                    jsonModuleName = ModuleMapper.getInstance().getTablename(className);
                 }
             } else {
                 continue;
             }
+
+            jsonLinkedInfo.put(jsonModuleName, jsonPropertyNames);
         }
 
         return jsonLinkedInfo;
     }
 
-    /// <summary>
-    /// Converts C# query predicate collection to json query predicate collection.
-    /// The C# query can have a mixture of both C# property name name json property name.
-    /// </summary>
-    /// <param name="modelInfo">SugarCrm module info.</param>
-    /// <param name="queryPredicates">The query predicate collection.</param>
-    /// <returns>The json predicate collection.</returns>
-    private static List<JsonPredicate> GetJsonPredicates(ModuleInfo moduleInfo, List<QueryPredicate> queryPredicates) {
+    /**
+     * Converts Java query predicate object collection to json query predicate collection.
+     *
+     * @param moduleInfo SugarCRM module info.
+     * @param queryPredicates The Java query predicate object collection.
+     * @return The json predicate collection.
+     */
+    private static List<JsonPredicate> getJsonPredicates(ModuleInfo moduleInfo, List<QueryPredicate> queryPredicates) {
         if ((queryPredicates == null) || (queryPredicates.size() == 0))
         {
             return null;
         }
 
         List<JsonPredicate> jsonPredicates = new ArrayList<JsonPredicate>();
-        List<ModelProperty> modelProperties = moduleInfo.modelProperties;
+        List<ModuleProperty> modelProperties = moduleInfo.modelProperties;
 
         for (QueryPredicate item : queryPredicates){
-            ModelProperty modelProperty = getProperty(modelProperties, item.getPropertyName());
-            if (modelProperty != null)
+            ModuleProperty moduleProperty = getProperty(modelProperties, item.getPropertyName());
+            if (moduleProperty != null)
             {
-                String jsonName = moduleInfo.jsonName + "." + modelProperty.jsonName;
-                boolean isNumeric = modelProperty.isNumeric;
-                String value = GetFormattedValue(item.getValue(), isNumeric);
-                String fromValue = GetFormattedValue(item.getFromValue(), isNumeric);
-                String toValue = GetFormattedValue(item.getToValue(), isNumeric);
+                String jsonName = moduleInfo.jsonName + "." + moduleProperty.jsonName;
+                boolean isNumeric = moduleProperty.isNumeric;
+                String value = getFormattedValue(item.getValue(), isNumeric);
+                String fromValue = getFormattedValue(item.getFromValue(), isNumeric);
+                String toValue = getFormattedValue(item.getToValue(), isNumeric);
 
                 jsonPredicates.add(new JsonPredicate(jsonName, item.getOperator(), value, fromValue, toValue, isNumeric));
             }
@@ -140,13 +174,14 @@ public class ModuleInfoExt {
         return jsonPredicates;
     }
 
-    /// <summary>
-    /// Gets the formatted query value considering whether it is a numeric value or not.
-    /// </summary>
-    /// <param name="value">The value to format.</param>
-    /// <param name="isNumeric">Boolean value to know if it is numeric or not.</param>
-    /// <returns>The formatted query value.</returns>
-    private static String GetFormattedValue(Object value, boolean isNumeric) {
+    /**
+     *  Gets the formatted query value considering whether it is a numeric value or not.
+     *
+     * @param value The value to format.
+     * @param isNumeric Boolean value to know if it is numeric or not.
+     * @return The formatted query value.
+     */
+    private static String getFormattedValue(Object value, boolean isNumeric) {
         if (value == null) {
             return null;
         }
@@ -183,12 +218,19 @@ public class ModuleInfoExt {
         return value.toString();
     }
 
-    private static ModelProperty getProperty(List<ModelProperty> modelProperties, String name) {
+    /**
+     *  Gets the Pojo property object based on json module name.
+     *
+     * @param modelProperties The json property name collection of module.
+     * @param name The json property name parameter.
+     * @return Module property object.
+     */
+    private static ModuleProperty getProperty(List<ModuleProperty> modelProperties, String name) {
         if ((modelProperties == null) || (modelProperties.size() ==0)) {
             return null;
         }
 
-        for (ModelProperty property : modelProperties) {
+        for (ModuleProperty property : modelProperties) {
             if (property.jsonName.equalsIgnoreCase(name)) {
                 return property;
             }
