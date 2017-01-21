@@ -43,13 +43,7 @@ package com.sugaronrest.tests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sugaronrest.*;
-import com.sugaronrest.modules.Accounts;
-import com.sugaronrest.modules.Contacts;
-import com.sugaronrest.tests.custommodels.CustomAcccount1;
-import com.sugaronrest.tests.helpers.AccountsModule;
-import com.sugaronrest.tests.helpers.LinkedModules;
 import com.sugaronrest.utils.JsonObjectMapper;
-import org.apache.http.HttpStatus;
 
 import java.io.IOException;
 import java.util.ArrayList;
