@@ -116,7 +116,7 @@ public class CustomAcccount1  extends Accounts {
 }
 ```
 
-### Response (Data)
+### Response (getData())
 ```java 
 getData() = null;
 
@@ -125,7 +125,7 @@ ObjectMapper mapper = JsonObjectMapper.getMapper();
 CustomAcccount1 customAccount = mapper.readValue(jsonData, CustomAcccount1.class);
 ```
 
-### Response (JData)
+### Response (getJData())
 ```java 
 {
   "website": "www.veganthe.co.jp",
@@ -200,3 +200,280 @@ CustomAcccount1 customAccount = mapper.readValue(jsonData, CustomAcccount1.class
   ]
 }
 ```
+
+
+### Response (getJsonRawRequest())
+```java 
+{
+  "method": "get_entry",
+  "input_type": "json",
+  "response_type": "json",
+  "rest_data": {
+    "session": "2p7qi9qpvjvic3et2t5m410e31",
+    "module_name": "Accounts",
+    "id": "2da8333f-10b8-d173-e38c-587662482d83",
+    "select_fields": [
+      "id",
+      "name",
+      "industry",
+      "website",
+      "shipping_address_city"
+    ],
+    "link_name_to_fields_array": [
+      {
+        "name": "contacts",
+        "value": [
+          "first_name",
+          "last_name",
+          "title",
+          "description",
+          "primary_address_postalcode"
+        ]
+      }
+    ],
+    "track_view": false
+  }
+}
+```
+
+### Response (getJsonRawResponse())
+```java 
+{
+  "entry_list": [
+    {
+      "id": "2da8333f-10b8-d173-e38c-587662482d83",
+      "module_name": "Accounts",
+      "name_value_list": {
+        "id": {
+          "name": "id",
+          "value": "2da8333f-10b8-d173-e38c-587662482d83"
+        },
+        "name": {
+          "name": "name",
+          "value": "RR. Talker Co"
+        },
+        "industry": {
+          "name": "industry",
+          "value": "Media"
+        },
+        "website": {
+          "name": "website",
+          "value": "www.veganthe.co.jp"
+        },
+        "shipping_address_city": {
+          "name": "shipping_address_city",
+          "value": "St. Petersburg"
+        }
+      }
+    }
+  ],
+  "relationship_list": [
+    [
+      {
+        "name": "contacts",
+        "records": [
+          {
+            "first_name": {
+              "name": "first_name",
+              "value": "Corina"
+            },
+            "last_name": {
+              "name": "last_name",
+              "value": "Bhatt"
+            },
+            "title": {
+              "name": "title",
+              "value": "IT Developer"
+            },
+            "description": {
+              "name": "description",
+              "value": ""
+            },
+            "primary_address_postalcode": {
+              "name": "primary_address_postalcode",
+              "value": "24688"
+            }
+          },
+          {
+            "first_name": {
+              "name": "first_name",
+              "value": "Ramiro"
+            },
+            "last_name": {
+              "name": "last_name",
+              "value": "Lehner"
+            },
+            "title": {
+              "name": "title",
+              "value": "Senior Product Manager"
+            },
+            "description": {
+              "name": "description",
+              "value": ""
+            },
+            "primary_address_postalcode": {
+              "name": "primary_address_postalcode",
+              "value": "39916"
+            }
+          },
+          {
+            "first_name": {
+              "name": "first_name",
+              "value": "Kelley"
+            },
+            "last_name": {
+              "name": "last_name",
+              "value": "Delorenzo"
+            },
+            "title": {
+              "name": "title",
+              "value": "Senior Product Manager"
+            },
+            "description": {
+              "name": "description",
+              "value": ""
+            },
+            "primary_address_postalcode": {
+              "name": "primary_address_postalcode",
+              "value": "38602"
+            }
+          },
+          {
+            "first_name": {
+              "name": "first_name",
+              "value": "Sheree"
+            },
+            "last_name": {
+              "name": "last_name",
+              "value": "Paulin"
+            },
+            "title": {
+              "name": "title",
+              "value": "VP Operations"
+            },
+            "description": {
+              "name": "description",
+              "value": ""
+            },
+            "primary_address_postalcode": {
+              "name": "primary_address_postalcode",
+              "value": "81029"
+            }
+          },
+          {
+            "first_name": {
+              "name": "first_name",
+              "value": "Jacqueline"
+            },
+            "last_name": {
+              "name": "last_name",
+              "value": "Clopton"
+            },
+            "title": {
+              "name": "title",
+              "value": "IT Developer"
+            },
+            "description": {
+              "name": "description",
+              "value": ""
+            },
+            "primary_address_postalcode": {
+              "name": "primary_address_postalcode",
+              "value": "91550"
+            }
+          },
+          {
+            "first_name": {
+              "name": "first_name",
+              "value": "Juanita"
+            },
+            "last_name": {
+              "name": "last_name",
+              "value": "Hong"
+            },
+            "title": {
+              "name": "title",
+              "value": "IT Developer"
+            },
+            "description": {
+              "name": "description",
+              "value": ""
+            },
+            "primary_address_postalcode": {
+              "name": "primary_address_postalcode",
+              "value": "19042"
+            }
+          },
+          {
+            "first_name": {
+              "name": "first_name",
+              "value": "Lamar"
+            },
+            "last_name": {
+              "name": "last_name",
+              "value": "Pagano"
+            },
+            "title": {
+              "name": "title",
+              "value": "IT Developer"
+            },
+            "description": {
+              "name": "description",
+              "value": ""
+            },
+            "primary_address_postalcode": {
+              "name": "primary_address_postalcode",
+              "value": "29452"
+            }
+          },
+          {
+            "first_name": {
+              "name": "first_name",
+              "value": "Bernadine"
+            },
+            "last_name": {
+              "name": "last_name",
+              "value": "Cossey"
+            },
+            "title": {
+              "name": "title",
+              "value": "President"
+            },
+            "description": {
+              "name": "description",
+              "value": ""
+            },
+            "primary_address_postalcode": {
+              "name": "primary_address_postalcode",
+              "value": "88939"
+            }
+          },
+          {
+            "first_name": {
+              "name": "first_name",
+              "value": "Paul"
+            },
+            "last_name": {
+              "name": "last_name",
+              "value": "Bast"
+            },
+            "title": {
+              "name": "title",
+              "value": "Director Sales"
+            },
+            "description": {
+              "name": "description",
+              "value": ""
+            },
+            "primary_address_postalcode": {
+              "name": "primary_address_postalcode",
+              "value": "40382"
+            }
+          }
+        ]
+      }
+    ]
+  ]
+}
+```
+
