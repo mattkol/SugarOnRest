@@ -9,7 +9,7 @@ For more info/documentation, please check [SugarOnRest wiki](https://github.com/
 
 ### Basic Sample Usages
 ```java
-string sugarCrmUrl = "http://191.101.224.189/sugar/service/v4_1/rest.php";
+string sugarCrmUrl = "http://demo.suiteondemand.com/service/v4_1/rest.php";
 string sugarCrmUsername = "will";
 string sugarCrmPassword = "will";
 
@@ -19,7 +19,7 @@ SugarRestClient client = new SugarRestClient(sugarCrmUrl, sugarCrmUsername, suga
 SugarRestRequest accountRequest = new SugarRestRequest(Accounts.class, RequestType.ReadById);
 
 // set the account id to read.
-accountRequest.setParameter("1f2d3240-0d8a-ca09-2e11-5777c29a4193");
+accountRequest.setParameter("8d836b3f-d5a3-4100-6e62-5883a43dc96f");
 SugarRestResponse accountResponse = client.execute(accountRequest);
 Accounts account = (Accounts)accountResponse.getData();
 
