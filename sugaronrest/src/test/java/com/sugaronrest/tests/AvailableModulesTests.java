@@ -6,7 +6,6 @@ import com.sugaronrest.SugarRestRequest;
 import com.sugaronrest.SugarRestResponse;
 import com.sugaronrest.utils.ModuleMapper;
 import org.apache.http.HttpStatus;
-import org.junit.Test;
 
 import java.util.List;
 

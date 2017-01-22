@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sugaronrest.utils.JsonObjectMapper;
 
 public final class TestAccount {
-
+    // public static String Url = "http://demo.suiteondemand.com/service/v4_1/rest.php";
     public static String Url = "http://191.101.224.189/sugar/service/v4_1/rest.php";
     public static String Username = "will";
     public static String Password = "will";

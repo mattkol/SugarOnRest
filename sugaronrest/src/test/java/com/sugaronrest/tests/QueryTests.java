@@ -4,6 +4,7 @@ import com.sugaronrest.*;
 import com.sugaronrest.modules.Accounts;
 import com.sugaronrest.modules.Cases;
 import com.sugaronrest.modules.Leads;
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 
@@ -90,8 +91,19 @@ public class QueryTests {
         request.setOptions(new Options());
         List<QueryPredicate> queryPredicates = new ArrayList<QueryPredicate>();
 
+        // Set query in this format:
+        // "leads.id IN('10d82d59-08eb-8f0d-28e0-5777b57af47c', '12037cd0-ead2-402e-e1d0-5777b5dfb965', '13d4109d-c5ca-7dd1-99f1-5777b57ef30f', '14c136e5-1a67-eeba-581c-5777b5c8c463', '14e4825e-9573-4d75-2dbe-5777b5b7ee85', '1705b33a-3fad-aa70-77ef-5777b5b081f1', '171c1d8b-e34f-3a1f-bef7-5777b5ecc823', '174a8fc4-56e6-3471-46d8-5777b565bf5b', '17c9c496-90a1-02f5-87bd-5777b51ab086', '1d210352-7a1f-2c5d-04ae-5777b5a3312f')");
+
+        StringBuilder builder = new StringBuilder();
+        for (String id : identifiers) {
+            builder.append(" '" + id + "', ");
+        }
+        String builderResult = builder.toString().trim();
+        builderResult = StringUtils.removeEnd(builderResult, ",");
+        String query = "leads.id IN(" + builderResult + ")";
+
         // Since query is set, the query predicates will be ignore.
-        request.getOptions().setQuery("leads.id IN('10d82d59-08eb-8f0d-28e0-5777b57af47c', '12037cd0-ead2-402e-e1d0-5777b5dfb965', '13d4109d-c5ca-7dd1-99f1-5777b57ef30f', '14c136e5-1a67-eeba-581c-5777b5c8c463', '14e4825e-9573-4d75-2dbe-5777b5b7ee85', '1705b33a-3fad-aa70-77ef-5777b5b081f1', '171c1d8b-e34f-3a1f-bef7-5777b5ecc823', '174a8fc4-56e6-3471-46d8-5777b565bf5b', '17c9c496-90a1-02f5-87bd-5777b51ab086', '1d210352-7a1f-2c5d-04ae-5777b5a3312f')");
+        request.getOptions().setQuery(query);
         queryPredicates.add(new QueryPredicate("last_name", Equal, "Johnson"));
         request.getOptions().setQueryPredicates(queryPredicates);
 

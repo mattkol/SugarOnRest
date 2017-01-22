@@ -45,7 +45,6 @@ public class LinkedModulesTests {
         // -------------------End Bulk Read Account-------------------
         // -------------------Read Account Link Contact-------------------
         String accountId = readAccounts.get(count - 1).getId();
-        accountId ="28270ac1-2a6b-e674-b751-5777b5c57439";
         response = LinkedModules.readAccountLinkContact(client, accountId);
 
         assertNotNull(response);
@@ -98,8 +97,6 @@ public class LinkedModulesTests {
         assertEquals(accountId, customAccount.getId());
 
         // -------------------End Read Account Link Concat-------------------
-
-        System.out.println(response.getJsonRawRequest());
     }
 
     @Test
@@ -121,9 +118,6 @@ public class LinkedModulesTests {
 
 
         // -------------------End Read Account Link Concat-------------------
-
-        System.out.println(response.getJsonRawRequest());
-        System.out.println(response.getJsonRawResponse());
     }
 
     @Test
@@ -188,9 +182,6 @@ public class LinkedModulesTests {
         String jsonData = response.getJData();
         assertNull(response.getData());
         assertNotNull(jsonData);
-
-        System.out.println(response.getJsonRawRequest());
-        System.out.println(response.getJsonRawResponse());
 
         // Deserialize json data to custom object
         ObjectMapper mapper = JsonObjectMapper.getMapper();
