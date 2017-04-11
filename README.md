@@ -9,9 +9,9 @@ For more info/documentation, please check [SugarOnRest wiki](https://github.com/
 
 ### Basic Sample Usages
 ```java
-string sugarCrmUrl = "http://demo.suiteondemand.com/service/v4_1/rest.php";
-string sugarCrmUsername = "will";
-string sugarCrmPassword = "will";
+String sugarCrmUrl = "http://demo.suiteondemand.com/service/v4_1/rest.php";
+String sugarCrmUsername = "will";
+String sugarCrmPassword = "will";
 
 SugarRestClient client = new SugarRestClient(sugarCrmUrl, sugarCrmUsername, sugarCrmPassword);
 
@@ -26,7 +26,7 @@ Accounts account = (Accounts)accountResponse.getData();
 
 // Option 2 - Read by known SugarCRM module name - "Contacts".
 SugarRestRequest contactRequest = new SugarRestRequest("Contacts", RequestType.ReadById);
-contactRequest.setParameter(contactid);
+contactRequest.setParameter("1b680648-20ca-cd20-692e-584fbec623e5");
 SugarRestResponse contactRresponse = client.execute(contactRequest);
 Contacts contact = (Contacts)contactRresponse.getData();
 
