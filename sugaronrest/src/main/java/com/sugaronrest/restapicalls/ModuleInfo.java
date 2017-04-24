@@ -24,14 +24,15 @@
 
 package com.sugaronrest.restapicalls;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.apache.commons.lang.StringUtils;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 public class ModuleInfo {
@@ -145,9 +146,13 @@ public class ModuleInfo {
     private static ModuleInfo readByType(Type type) throws Exception {
         ModuleInfo moduleInfo = new ModuleInfo();
 
-        String className = getClassName(type);
-        ClassLoader classLoader = ModuleInfo.class.getClassLoader();
-        Class moduleClass = Class.forName(PackageName + "." + className, false, classLoader);
+        Class moduleClass;
+
+        if (type instanceof Class) {
+            moduleClass = (Class) type;
+        } else {
+            throw new ClassCastException();
+        }
 
         String moduleName = null;
         String jsonModuleName = null;
@@ -241,26 +246,6 @@ public class ModuleInfo {
         }
 
         return modelProperties;
-    }
-
-    /**
-     * Gets class name.
-     *
-     * @param moduleName Module name.
-     * @return Class name.
-     */
-    private static String getClassName(String moduleName) {
-        if (!StringUtils.isNotBlank(moduleName)) {
-            return StringUtils.EMPTY;
-        }
-
-        moduleName = moduleName.trim();
-        String[] splitArray = moduleName.split("\\.");
-        if (splitArray.length > 0) {
-            return splitArray[splitArray.length - 1];
-        }
-
-        return moduleName;
     }
 
     /**
