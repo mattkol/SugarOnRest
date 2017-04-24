@@ -146,13 +146,7 @@ public class ModuleInfo {
     private static ModuleInfo readByType(Type type) throws Exception {
         ModuleInfo moduleInfo = new ModuleInfo();
 
-        Class moduleClass;
-
-        if (type instanceof Class) {
-            moduleClass = (Class) type;
-        } else {
-            throw new ClassCastException();
-        }
+        Class<?> moduleClass = (Class<?>) type;
 
         String moduleName = null;
         String jsonModuleName = null;
