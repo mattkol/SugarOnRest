@@ -45,7 +45,7 @@ public class ErrorCodes {
     /**
      * Invalid entity type error code
      */
-    public static String ModuleNameOrTypeInvalid = "Module name is provied or module type provided is not a valid SugarCRM module type.";
+    public static String ModuleNameOrTypeInvalid = "Module name is provided or module type provided is not a valid SugarCRM module type.";
 
     /**
      * Invalid entity type error code
