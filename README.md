@@ -32,9 +32,10 @@ Contacts contact = (Contacts)contactRresponse.getData();
 
 ```
 
-<br />
 ### Advanced Sample Usage - Linked Module
-This sample usage shows how to read "Accounts" module entity data with linked modules (link "Contacts" module). For more request options make changes to the [Options parameter](https://github.com/mattkol/SugarOnRest/wiki/Request-Options).
+This sample usage shows how to read "Accounts" module entity data with linked modules (link "Contacts" module). For more request options make changes to the
+[Request Options](https://github.com/mattkol/SugarOnRest/wiki/Request-Options) 
+
 
 This implements the **_get_entry_** SugarCRM REST API method setting the **_link_name_to_fields_array_** parameter.
 
